@@ -5,33 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Background Image Test</title>
     <style>
+        /* Full-page background image */
         body {
-            /* Set the background image URL */
-            background-image: url('https://cdn.discordapp.com/attachments/1059129758467756164/1407333394391498782/vatrianwouldapprove.gif?ex=68aafedc&is=68a9ad5c&hm=d58daa6ebca3f73d651aaeb966ea0e1984f3464e7d1ccbbe92a355ffc1d41ecb&'); /* replace with your image file */
-            
-            /* Make the image cover the whole page */
-            background-size: cover;
-            
-            /* Center the image */
-            background-position: center;
-            
-            /* Make sure it doesn't repeat */
+            margin: 0;
+            height: 100vh;
+            background-image: url('https://cdn.discordapp.com/attachments/1059129758467756164/1407333394391498782/vatrianwouldapprove.gif?ex=68aafedc&is=68a9ad5c&hm=d58daa6ebca3f73d651aaeb966ea0e1984f3464e7d1ccbbe92a355ffc1d41ecb&'); /* Replace with your image file name */
+            background-size: cover;      /* Fill the page while keeping aspect ratio */
+            background-position: center; /* Center the image */
             background-repeat: no-repeat;
+            background-attachment: fixed; /* Optional: keeps image fixed when scrolling */
             
-            /* Optional: add a fallback color */
-            background-color: #cccccc;
-
-            /* Keep text readable */
+            /* Text styling */
             color: white;
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7); /* Makes text readable on bright backgrounds */
+        }
+
+        p {
+            font-size: 1.5em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         }
     </style>
 </head>
 <body>
-    <h1>🌄 Look at my background!</h1>
-    <p>The background image is working if you can see this!</p>
+    <h1>🌄 My Website Works!</h1>
+    <p>The background image is set correctly.</p>
 </body>
-</html>
+<
+
+
 
