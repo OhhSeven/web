@@ -5,148 +5,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdSpace.gg</title>
     <style>
-        /* --- General Page Setup --- */
+        /* Global Styles */
         body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #001f4d; /* dark blue background */
-            color: #ffffff;
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            line-height: 1.6;
         }
-
         a {
             text-decoration: none;
             color: inherit;
         }
 
-        /* --- Header --- */
+        /* Header */
         header {
-            background-color: #004080; /* lighter blue */
+            background-color: #003366;
+            color: #fff;
             padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         header h1 {
             margin: 0;
-            font-size: 2em;
-            color: #00bfff; /* bright blue accent */
+            font-size: 1.8em;
         }
-
         nav a {
             margin-left: 20px;
             font-weight: bold;
+            color: #fff;
+            transition: color 0.3s;
+        }
+        nav a:hover {
             color: #00bfff;
         }
 
-        /* --- Hero Section --- */
+        /* Hero Section */
         .hero {
+            background: url('hero-bg.jpg') center/cover no-repeat;
+            color: #fff;
             text-align: center;
             padding: 100px 20px;
-            background: linear-gradient(rgba(0,31,77,0.8), rgba(0,31,77,0.8)), url('hero-bg.jpg') no-repeat center center;
-            background-size: cover;
         }
-
         .hero h2 {
             font-size: 3em;
             margin-bottom: 20px;
-            color: #00bfff;
         }
-
         .hero p {
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
 
-        /* --- Ad Collage Section --- */
-        .ads-section {
-            padding: 60px 20px;
-            text-align: center;
-            background-color: #003366;
-        }
-
-        .ads-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: #00bfff;
-        }
-
-        .ad-collage {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        /* Ad Gallery */
+        .ads-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
+            padding: 40px 20px;
+            background-color: #fff;
         }
-
         .ad-item {
-            background-color: #004080;
-            width: 250px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            font-weight: bold;
+            background-color: #003366;
+            color: #fff;
+            padding: 20px;
             border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
         }
-
         .ad-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #00bfff;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* --- Pricing Section --- */
+        /* Pricing Section */
         .pricing {
-            padding: 60px 20px;
-            background-color: #002244;
             text-align: center;
+            padding: 60px 20px;
+            background-color: #003366;
+            color: #fff;
         }
-
         .pricing h2 {
             font-size: 2.5em;
-            margin-bottom: 30px;
-            color: #00bfff;
+            margin-bottom: 20px;
         }
-
         .pricing p {
-            font-size: 1.5em;
+            font-size: 1.2em;
+            margin-bottom: 30px;
         }
-
         .pricing button {
-            margin-top: 20px;
             padding: 15px 30px;
             font-size: 1.2em;
             background-color: #00bfff;
-            color: #001f4d;
+            color: #003366;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s;
         }
-
         .pricing button:hover {
-            background-color: #0080ff;
+            background-color: #0099cc;
         }
 
-        /* --- Footer --- */
+        /* Footer */
         footer {
-            padding: 20px;
             text-align: center;
-            background-color: #004080;
-            color: #00bfff;
+            padding: 20px;
+            background-color: #003366;
+            color: #fff;
         }
 
-        /* --- Responsive --- */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .ad-collage {
-                flex-direction: column;
-                align-items: center;
+            .hero h2 {
+                font-size: 2.5em;
             }
-
-            .ad-item {
-                width: 80%;
-                height: 150px;
+            .hero p {
+                font-size: 1.1em;
             }
         }
     </style>
@@ -159,32 +134,29 @@
         <nav>
             <a href="#ads">Ads</a>
             <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h2>Advertise Here!</h2>
-        <p>Get your business, server, or product noticed for just $10/week</p>
+        <h2>Advertise Your Brand</h2>
+        <p>Get your message seen for just $10/week</p>
     </section>
 
-    <!-- Ad Collage Section -->
-    <section class="ads-section" id="ads">
-        <h2>Current Ads</h2>
-        <div class="ad-collage" id="adCollage">
-            <!-- Sample ads -->
-            <div class="ad-item">Ad 1</div>
-            <div class="ad-item">Ad 2</div>
-            <div class="ad-item">Ad 3</div>
-            <div class="ad-item">Ad 4</div>
-            <div class="ad-item">Ad 5</div>
-        </div>
+    <!-- Ad Gallery -->
+    <section class="ads-gallery" id="ads">
+        <div class="ad-item">Ad 1</div>
+        <div class="ad-item">Ad 2</div>
+        <div class="ad-item">Ad 3</div>
+        <div class="ad-item">Ad 4</div>
+        <div class="ad-item">Ad 5</div>
     </section>
 
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <h2>Advertising Pricing</h2>
-        <p>Just $10 for 1 week of exposure</p>
+        <p>Only $10 for 1 week of exposure</p>
         <button onclick="alert('Payment system not yet connected')">Buy Now</button>
     </section>
 
@@ -192,20 +164,6 @@
     <footer>
         &copy; 2025 AdSpace.gg | All rights reserved
     </footer>
-
-    <!-- Optional JS for dynamic ads (later) -->
-    <script>
-        // Example: dynamically add ads
-        const adCollage = document.getElementById('adCollage');
-        const sampleAds = ['Ad 6', 'Ad 7', 'Ad 8'];
-
-        sampleAds.forEach(ad => {
-            const div = document.createElement('div');
-            div.className = 'ad-item';
-            div.innerText = ad;
-            adCollage.appendChild(div);
-        });
-    </script>
 
 </body>
 </html>
