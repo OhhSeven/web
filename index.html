@@ -1,104 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Bouncing Textarea</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      background-color: #222;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    #myText {
-      position: absolute;
-      width: 300px;
-      height: 150px;
-      border-radius: 10px;
-      padding: 10px;
-      font-size: 16px;
-      border: 2px solid #36bcff;
-      background: #111;
-      color: #eee;
-      resize: none;
-      cursor: grab;
-      user-select: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image Test</title>
+    <style>
+        body {
+            /* Set the background image URL */
+            background-image: url('background.jpg'); /* replace with your image file */
+            
+            /* Make the image cover the whole page */
+            background-size: cover;
+            
+            /* Center the image */
+            background-position: center;
+            
+            /* Make sure it doesn't repeat */
+            background-repeat: no-repeat;
+            
+            /* Optional: add a fallback color */
+            background-color: #cccccc;
+
+            /* Keep text readable */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-
-  <textarea id="myText" placeholder="Type here..."></textarea>
-
-  <script>
-    const box = document.getElementById("myText");
-    let x = 100; // initial x position
-    let y = 100; // initial y position
-    let dx = 3;  // velocity in x
-    let dy = 3;  // velocity in y
-
-    function moveBox() {
-      const boxWidth = box.offsetWidth;
-      const boxHeight = box.offsetHeight;
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-
-      x += dx;
-      y += dy;
-
-      // Bounce off right or left edges
-      if (x + boxWidth > windowWidth || x < 0) {
-        dx = -dx;
-        x += dx;
-      }
-
-      // Bounce off bottom or top edges
-      if (y + boxHeight > windowHeight || y < 0) {
-        dy = -dy;
-        y += dy;
-      }
-
-      box.style.left = x + "px";
-      box.style.top = y + "px";
-
-      requestAnimationFrame(moveBox);
-    }
-
-    moveBox();
-
-    // Optional: Let user drag the textarea and reset velocity on release
-    let isDragging = false;
-    let dragOffsetX, dragOffsetY;
-
-    box.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      dragOffsetX = e.clientX - box.offsetLeft;
-      dragOffsetY = e.clientY - box.offsetTop;
-      box.style.cursor = 'grabbing';
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        box.style.cursor = 'grab';
-        // Reset velocity randomly on release so it moves again
-        dx = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 3);
-        dy = (Math.random() > 0.5 ? 1 : -1) * (2 + Math.random() * 3);
-      }
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        x = e.clientX - dragOffsetX;
-        y = e.clientY - dragOffsetY;
-        box.style.left = x + "px";
-        box.style.top = y + "px";
-      }
-    });
-  </script>
-
+    <h1>🌄 Look at my background!</h1>
+    <p>The background image is working if you can see this!</p>
 </body>
 </html>
