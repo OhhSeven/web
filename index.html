@@ -1,239 +1,69 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Dark Landing Page</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark {
-      background-color: #0d0d0d;
-      color: white;
-    }
-    body.light {
-      background-color: #f9f9f9;
-      color: #111;
-    }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      background: #111;
-      padding: 10px 20px;
-      border-radius: 50px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      z-index: 1000;
-      transition: background 0.3s;
-    }
-    body.light .navbar {
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .navbar .brand {
-      font-weight: 600;
-      margin-right: 30px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .navbar .brand span {
-      color: #4da6ff;
-    }
-
-    .navbar a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #aaa;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    body.light .navbar a {
-      color: #555;
-    }
-    .navbar a:hover {
-      color: #fff;
-    }
-    body.light .navbar a:hover {
-      color: #111;
-    }
-
-    .navbar .spacer {
-      flex: 1;
-    }
-
-    .btn {
-      padding: 6px 16px;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      margin-left: 10px;
-      transition: 0.2s;
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid #555;
-      color: white;
-    }
-    body.light .btn-outline {
-      color: #111;
-      border: 1px solid #ccc;
-    }
-    .btn-outline:hover {
-      border-color: #4da6ff;
-      color: #4da6ff;
-    }
-    .btn-primary {
-      background: #4da6ff;
-      color: white;
-    }
-    .btn-primary:hover {
-      background: #3399ff;
-    }
-
-    .theme-toggle {
-      background: none;
-      border: none;
-      font-size: 18px;
-      margin: 0 10px;
-      cursor: pointer;
-      color: inherit;
-    }
-
-    /* Hero section */
-    .hero {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 160px 20px 60px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-    .hero h1 span {
-      background: #1a1f2e;
-      color: #4da6ff;
-      padding: 2px 8px;
-      border-radius: 8px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: #aaa;
-      margin-bottom: 40px;
-    }
-
-    /* Input group */
-    .input-group {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #111;
-      border-radius: 40px;
-      overflow: hidden;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    body.light .input-group {
-      background: #fff;
-      border: 1px solid #ccc;
-    }
-
-    .input-group input {
-      border: none;
-      padding: 14px 16px;
-      flex: 1;
-      font-size: 1rem;
-      color: white;
-      background: transparent;
-      outline: none;
-      min-width: 120px;
-    }
-    body.light .input-group input {
-      color: #111;
-    }
-
-    .input-group span {
-      padding: 14px 16px;
-      color: #555;
-      background: transparent;
-      font-size: 1rem;
-      white-space: nowrap;
-    }
-
-    .input-group button {
-      background: #4da6ff;
-      border: none;
-      color: white;
-      padding: 14px 24px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      border-radius: 40px;
-    }
-    .input-group button:hover {
-      background: #3399ff;
-    }
-  </style>
+  <title>Placeholder Site</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="dark">
+<body class="bg-black text-white font-sans">
 
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="brand">
-      <span>#</span> Placeholder
-    </div>
-    <a href="#">About</a>
-    <a href="#">Docs</a>
-    <a href="#">Pricing</a>
-    <div class="spacer"></div>
-    <button class="theme-toggle" onclick="toggleTheme()">🌞</button>
-    <button class="btn btn-outline">Action 1</button>
-    <button class="btn btn-primary">Action 2</button>
-  </div>
+  <!-- Hero / Title Section -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <h1 class="text-5xl sm:text-6xl font-bold mb-6">
+      A sharp new way to <span class="bg-blue-700 text-white px-3 py-1 rounded-lg">advertise</span>
+    </h1>
+    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mb-8">
+      Run your own ads, control your exposure, and join a network of self-hosted promotions.  
+      Built for visibility, simplicity, and growth.
+    </p>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1>A sharp new way to <span>placeholder</span></h1>
-    <p>Run your own thing here, control your data, and join a network of self-hosted instances. Built for privacy, simplicity and fun.</p>
-    
-    <div class="input-group">
-      <input type="text" placeholder="yourname">
-      <input type="text" placeholder="domain">
-      <span>#placeholder.com</span>
-      <button>Create</button>
+    <div class="flex items-center bg-gray-900 rounded-full overflow-hidden shadow-lg">
+      <input type="text" placeholder="yourname"
+             class="px-4 py-3 bg-transparent text-gray-300 outline-none">
+      <span class="px-4 text-gray-500">#example.com</span>
+      <button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-medium transition">
+        Create
+      </button>
     </div>
   </section>
 
-  <script>
-    function toggleTheme() {
-      const body = document.body;
-      body.classList.toggle("dark");
-      body.classList.toggle("light");
+  <!-- Feature Cards Section -->
+  <section class="py-20 px-6 bg-black">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- Card -->
+      <div class="bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
+          <span class="text-blue-500 mr-2">#</span> Placeholder 1
+        </h3>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
 
-      const btn = document.querySelector(".theme-toggle");
-      if (body.classList.contains("dark")) {
-        btn.textContent = "🌞";
-      } else {
-        btn.textContent = "🌙";
-      }
-    }
-  </script>
+      <div class="bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
+          <span class="text-blue-500 mr-2">★</span> Placeholder 2
+        </h3>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
+          <span class="text-blue-500 mr-2">⚡</span> Placeholder 3
+        </h3>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
+
+      <div class="bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
+          <span class="text-blue-500 mr-2">✔</span> Placeholder 4
+        </h3>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
+
+      <!-- Add more if needed -->
+    </div>
+  </section>
 
 </body>
 </html>
