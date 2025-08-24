@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="transition-colors duration-500">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Placeholder Site</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-white font-sans">
+<body class="bg-black text-white font-sans transition-colors duration-500">
 
   <!-- Top Header / Navbar -->
-  <header class="w-full bg-black border-b border-gray-800 fixed top-0 left-0 z-50">
+  <header class="w-full bg-black border-b border-gray-800 fixed top-0 left-0 z-50 transition-colors duration-500">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
       <!-- Logo -->
       <div class="text-xl font-bold text-white">YourLogo</div>
@@ -22,22 +22,27 @@
         <a href="#" class="hover:text-white transition">Contact</a>
       </nav>
       
-      <!-- Action button -->
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
-        Get Started
-      </button>
+      <!-- Action buttons -->
+      <div class="flex items-center space-x-3">
+        <button id="modeToggle" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded-full transition">
+          🌙
+        </button>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
+          Get Started
+        </button>
+      </div>
     </div>
   </header>
 
   <!-- Spacer so hero isn't hidden behind fixed header -->
-  <div class="h-20"></div>
+  <div class="h-16"></div>
 
   <!-- Hero / Title Section -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-    <h1 class="text-5xl sm:text-6xl font-bold mb-6">
+  <section class="flex flex-col justify-center items-center text-center px-6 py-16 space-y-6">
+    <h1 class="text-4xl sm:text-5xl font-bold">
       A sharp new way to <span class="bg-blue-700 text-white px-3 py-1 rounded-lg">advertise</span>
     </h1>
-    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mb-8">
+    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl">
       Run your own ads, control your exposure, and join a network of self-hosted promotions.  
       Built for visibility, simplicity, and growth.
     </p>
@@ -53,7 +58,7 @@
   </section>
 
   <!-- Feature Cards Section -->
-  <section class="py-20 px-6 bg-black">
+  <section class="py-16 px-6 bg-black">
     <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       
       <!-- Card -->
@@ -85,9 +90,25 @@
         <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
 
-      <!-- Add more if needed -->
     </div>
   </section>
+
+  <!-- Night/Light Mode Script -->
+  <script>
+    const toggle = document.getElementById('modeToggle');
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        document.body.classList.remove('bg-white', 'text-black');
+        document.body.classList.add('bg-black', 'text-white');
+        toggle.textContent = '☀️';
+      } else {
+        document.body.classList.remove('bg-black', 'text-white');
+        document.body.classList.add('bg-white', 'text-black');
+        toggle.textContent = '🌙';
+      }
+    });
+  </script>
 
 </body>
 </html>
