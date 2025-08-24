@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -145,7 +145,7 @@
       background: #111;
       border-radius: 40px;
       overflow: hidden;
-      max-width: 500px;
+      max-width: 600px;
       margin: 0 auto;
     }
     body.light .input-group {
@@ -161,6 +161,7 @@
       color: white;
       background: transparent;
       outline: none;
+      min-width: 120px;
     }
     body.light .input-group input {
       color: #111;
@@ -171,6 +172,7 @@
       color: #555;
       background: transparent;
       font-size: 1rem;
+      white-space: nowrap;
     }
 
     .input-group button {
@@ -212,6 +214,7 @@
     
     <div class="input-group">
       <input type="text" placeholder="yourname">
+      <input type="text" placeholder="domain">
       <span>#placeholder.com</span>
       <button>Create</button>
     </div>
