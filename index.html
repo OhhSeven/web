@@ -7,11 +7,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class', // enable class-based dark mode
+      darkMode: 'class', // Enable class-based dark mode
     }
   </script>
 </head>
-<body class="bg-white text-black font-sans transition-colors duration-500">
+<body class="bg-white dark:bg-black text-black dark:text-white font-sans transition-colors duration-500">
 
   <!-- Top Header / Navbar -->
   <header class="w-full border-b border-gray-300 dark:border-gray-800 fixed top-0 left-0 z-50 transition-colors duration-500
@@ -53,11 +53,11 @@
       Built for visibility, simplicity, and growth.
     </p>
 
-    <div class="flex items-center bg-gray-200 dark:bg-gray-900 rounded-full overflow-hidden shadow-lg transition-colors duration-500">
+    <div class="flex items-center bg-gray-200 dark:bg-gray-900 rounded-full overflow-hidden shadow transition-colors duration-500">
       <input type="text" placeholder="yourname"
-             class="px-4 py-3 bg-transparent text-black dark:text-white outline-none">
+             class="px-4 py-3 bg-transparent text-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-gray-400">
       <span class="px-4 text-gray-500 dark:text-gray-400">#example.com</span>
-      <button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-medium text-white transition">
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition">
         Create
       </button>
     </div>
