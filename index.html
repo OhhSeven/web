@@ -1,191 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdSpace.gg</title>
-    <style>
-        /* Reset & Global */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0b0c10;
-            color: #ffffff;
-        }
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Dark Navbar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background-color: #1f2833;
-        }
-        header h1 {
-            font-size: 1.8em;
-            color: #66fcf1;
-        }
-        nav a {
-            margin-left: 20px;
-            font-weight: bold;
-            color: #ffffff;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #66fcf1;
-        }
+    /* Dark theme default */
+    body.dark {
+      background-color: #0d0d0d;
+      color: white;
+    }
 
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 120px 20px 80px;
-        }
-        .hero h2 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        .hero h2 span {
-            background-color: #1f2833;
-            color: #66fcf1;
-            padding: 0 10px;
-            border-radius: 5px;
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            color: #c5c6c7;
-        }
-        .hero input[type="text"] {
-            padding: 15px;
-            width: 250px;
-            border: none;
-            border-radius: 5px 0 0 5px;
-            outline: none;
-        }
-        .hero button {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            background-color: #45a29e;
-            color: #0b0c10;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .hero button:hover {
-            background-color: #66fcf1;
-        }
+    /* Light theme */
+    body.light {
+      background-color: #f9f9f9;
+      color: #111;
+    }
 
-        /* Features Grid */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 60px 40px;
-        }
-        .feature-card {
-            background-color: #1f2833;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-        .feature-card h3 {
-            margin-bottom: 10px;
-            color: #66fcf1;
-        }
-        .feature-card p {
-            color: #c5c6c7;
-            font-size: 0.95em;
-        }
+    /* Navbar container */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      background: #111;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      z-index: 1000;
+      transition: background 0.3s;
+    }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1f2833;
-            color: #66fcf1;
-        }
+    body.light .navbar {
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 2.2em;
-            }
-            .hero input[type="text"] {
-                width: 180px;
-            }
-        }
-    </style>
+    /* Brand */
+    .navbar .brand {
+      font-weight: 600;
+      margin-right: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar .brand span {
+      color: #4da6ff;
+    }
+
+    /* Links */
+    .navbar a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #aaa;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    body.light .navbar a {
+      color: #555;
+    }
+
+    .navbar a:hover {
+      color: #fff;
+    }
+    body.light .navbar a:hover {
+      color: #111;
+    }
+
+    /* Spacer pushes buttons to right */
+    .navbar .spacer {
+      flex: 1;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 10px;
+      transition: 0.2s;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #555;
+      color: white;
+    }
+    body.light .btn-outline {
+      color: #111;
+      border: 1px solid #ccc;
+    }
+
+    .btn-outline:hover {
+      border-color: #4da6ff;
+      color: #4da6ff;
+    }
+
+    .btn-primary {
+      background: #4da6ff;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #3399ff;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 18px;
+      margin: 0 10px;
+      cursor: pointer;
+      color: inherit;
+    }
+  </style>
 </head>
-<body>
+<body class="dark">
 
-    <!-- Header -->
-    <header>
-        <h1>OhhSeven.com</h1>
-        <nav>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="brand">
+      <span>#</span> Placeholder
+    </div>
+    <a href="#">About</a>
+    <a href="#">Docs</a>
+    <a href="#">Pricing</a>
+    <div class="spacer"></div>
+    <button class="theme-toggle" onclick="toggleTheme()">🌞</button>
+    <button class="btn btn-outline">Action 1</button>
+    <button class="btn btn-primary">Action 2</button>
+  </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2>A sharp new way to <span>advertise</span></h2>
-        <p>Sell ad space for $10/week and display your content in our ad collage.</p>
-        <div>
-            <input type="text" placeholder="Your ad name">
-            <button>Create (this does nothing)</button>
-        </div>
-    </section>
+  <div style="height:2000px; padding-top:100px; text-align:center;">
+    <h1>Scroll down to see navbar stay fixed</h1>
+    <p>Click the 🌞 / 🌙 icon to switch themes.</p>
+  </div>
 
-    <!-- Features Grid -->
-    <section class="features" id="features">
-        <div class="feature-card">
-            <h3>Simple Setup</h3>
-            <p>Add your ad in seconds and it will appear on the site immediately. (it wont, I will have to manually add it - what do u think this is?)</p>
-        </div>
-        <div class="feature-card">
-            <h3>Flexible Duration</h3>
-            <p>Control how long your ad runs – currently $10/week.e (just give me more money basically)</p>
-        </div>
-        <div class="feature-card">
-            <h3>Dynamic Collage</h3>
-            <p>All ads are displayed in a stylish grid that scales with your content. (Running out of features already)</p>
-        </div>
-        <div class="feature-card">
-            <h3>Responsive Design</h3>
-            <p>Looks great on mobile, tablet, and desktop automatically. (I havent acutally checked tbh)</p>
-        </div>
-        <div class="feature-card">
-            <h3>Secure</h3>
-            <p>Ads are hosted safely and securely, no spam or hidden scripts. (On the brightside, if hackers do get into this, all they will see is your advertisments!)</p>
-        </div>
-        <div class="feature-card">
-            <h3>Easy Management</h3>
-            <p>Manage your ads easily from a simple input interface. (this is completely bs, dm me to change your ad)</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        &copy; 2025 OhhSeven.com | All rights reserved (not that I fucking know them)
-    </footer>
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle("dark");
+      body.classList.toggle("light");
+      
+      // Update icon
+      const btn = document.querySelector(".theme-toggle");
+      if (body.classList.contains("dark")) {
+        btn.textContent = "🌞";
+      } else {
+        btn.textContent = "🌙";
+      }
+    }
+  </script>
 
 </body>
 </html>
-
-
