@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Dark Navbar</title>
+  <title>Modern Dark Landing Page</title>
   <style>
     body {
       margin: 0;
@@ -11,19 +11,16 @@
       transition: background 0.3s, color 0.3s;
     }
 
-    /* Dark theme default */
     body.dark {
       background-color: #0d0d0d;
       color: white;
     }
-
-    /* Light theme */
     body.light {
       background-color: #f9f9f9;
       color: #111;
     }
 
-    /* Navbar container */
+    /* Navbar */
     .navbar {
       position: fixed;
       top: 20px;
@@ -38,13 +35,11 @@
       z-index: 1000;
       transition: background 0.3s;
     }
-
     body.light .navbar {
       background: #fff;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    /* Brand */
     .navbar .brand {
       font-weight: 600;
       margin-right: 30px;
@@ -52,12 +47,10 @@
       align-items: center;
       gap: 8px;
     }
-
     .navbar .brand span {
       color: #4da6ff;
     }
 
-    /* Links */
     .navbar a {
       margin: 0 10px;
       text-decoration: none;
@@ -65,11 +58,9 @@
       font-weight: 500;
       transition: color 0.2s;
     }
-
     body.light .navbar a {
       color: #555;
     }
-
     .navbar a:hover {
       color: #fff;
     }
@@ -77,12 +68,10 @@
       color: #111;
     }
 
-    /* Spacer pushes buttons to right */
     .navbar .spacer {
       flex: 1;
     }
 
-    /* Buttons */
     .btn {
       padding: 6px 16px;
       border-radius: 20px;
@@ -92,7 +81,6 @@
       margin-left: 10px;
       transition: 0.2s;
     }
-
     .btn-outline {
       background: transparent;
       border: 1px solid #555;
@@ -102,22 +90,18 @@
       color: #111;
       border: 1px solid #ccc;
     }
-
     .btn-outline:hover {
       border-color: #4da6ff;
       color: #4da6ff;
     }
-
     .btn-primary {
       background: #4da6ff;
       color: white;
     }
-
     .btn-primary:hover {
       background: #3399ff;
     }
 
-    /* Theme toggle button */
     .theme-toggle {
       background: none;
       border: none;
@@ -125,6 +109,83 @@
       margin: 0 10px;
       cursor: pointer;
       color: inherit;
+    }
+
+    /* Hero section */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 160px 20px 60px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: #1a1f2e;
+      color: #4da6ff;
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #aaa;
+      margin-bottom: 40px;
+    }
+
+    /* Input group */
+    .input-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      border-radius: 40px;
+      overflow: hidden;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    body.light .input-group {
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+
+    .input-group input {
+      border: none;
+      padding: 14px 16px;
+      flex: 1;
+      font-size: 1rem;
+      color: white;
+      background: transparent;
+      outline: none;
+    }
+    body.light .input-group input {
+      color: #111;
+    }
+
+    .input-group span {
+      padding: 14px 16px;
+      color: #555;
+      background: transparent;
+      font-size: 1rem;
+    }
+
+    .input-group button {
+      background: #4da6ff;
+      border: none;
+      color: white;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-radius: 40px;
+    }
+    .input-group button:hover {
+      background: #3399ff;
     }
   </style>
 </head>
@@ -144,18 +205,24 @@
     <button class="btn btn-primary">Action 2</button>
   </div>
 
-  <div style="height:2000px; padding-top:100px; text-align:center;">
-    <h1>Scroll down to see navbar stay fixed</h1>
-    <p>Click the 🌞 / 🌙 icon to switch themes.</p>
-  </div>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>A sharp new way to <span>placeholder</span></h1>
+    <p>Run your own thing here, control your data, and join a network of self-hosted instances. Built for privacy, simplicity and fun.</p>
+    
+    <div class="input-group">
+      <input type="text" placeholder="yourname">
+      <span>#placeholder.com</span>
+      <button>Create</button>
+    </div>
+  </section>
 
   <script>
     function toggleTheme() {
       const body = document.body;
       body.classList.toggle("dark");
       body.classList.toggle("light");
-      
-      // Update icon
+
       const btn = document.querySelector(".theme-toggle");
       if (body.classList.contains("dark")) {
         btn.textContent = "🌞";
