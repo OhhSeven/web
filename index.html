@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="transition-colors duration-500">
+<html lang="en" class="dark transition-colors duration-500">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,31 +11,31 @@
     }
   </script>
 </head>
-<body class="bg-white dark:bg-black text-black dark:text-white font-sans transition-colors duration-500">
+<body class="bg-black dark:bg-black text-white font-sans transition-colors duration-500">
 
   <!-- Top Header / Navbar -->
-  <header class="w-full border-b border-gray-300 dark:border-gray-800 fixed top-0 left-0 z-50 bg-white dark:bg-black transition-colors duration-500">
+  <header class="w-full border-b border-gray-800 fixed top-0 left-0 z-50 bg-black dark:bg-black transition-colors duration-500">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
       <!-- Logo -->
-      <div class="text-xl font-bold text-black dark:text-white">OhhSeven.com</div>
+      <div class="text-xl font-bold text-white">YourLogo</div>
       
       <!-- Nav links -->
-      <nav class="hidden md:flex space-x-8 text-gray-700 dark:text-gray-300">
-        <a href="#" class="hover:text-black dark:hover:text-white transition">Home</a>
-        <a href="#" class="hover:text-black dark:hover:text-white transition">Features</a>
-        <a href="#" class="hover:text-black dark:hover:text-white transition">Pricing</a>
-        <a href="#" class="hover:text-black dark:hover:text-white transition">Contact</a>
+      <nav class="hidden md:flex space-x-8 text-gray-300">
+        <a href="#" class="hover:text-white transition">Home</a>
+        <a href="#" id="featuresTab" class="hover:text-white transition">Features</a>
+        <a href="#" class="hover:text-white transition">Rules</a>
+        <a href="#" class="hover:text-white transition">Contact</a>
       </nav>
       
       <!-- Action buttons -->
       <div class="flex items-center space-x-3">
-        <button id="modeToggle" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-black dark:text-white px-3 py-1 rounded-full transition">
-          🌙
+        <button id="modeToggle" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded-full transition">
+          ☀️
         </button>
-        <a href="https://www.paypal.me/OhhSeven" target="_blank" 
+        <button id="buyNowBtn" 
            class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
           Buy Now
-        </a>
+        </button>
       </div>
     </div>
   </header>
@@ -45,69 +45,103 @@
 
   <!-- Hero Section -->
   <section class="flex flex-col justify-center items-center text-center px-6 py-12 space-y-5">
-    <h1 class="text-4xl sm:text-5xl font-bold text-black dark:text-white">
+    <h1 class="text-4xl sm:text-5xl font-bold text-white">
       A sharp new way to <span class="bg-blue-700 text-white px-3 py-1 rounded-lg">advertise</span>
     </h1>
-    <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-400 max-w-2xl">
+    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl">
       Run your own ads, control your exposure, and join a network of self-hosted promotions.  
       Built for visibility, simplicity, and growth.
     </p>
 
-    <div class="flex items-center bg-gray-200 dark:bg-gray-900 rounded-full overflow-hidden shadow transition-colors duration-500">
+    <div class="flex items-center bg-gray-900 rounded-full overflow-hidden shadow transition-colors duration-500">
       <input type="text" placeholder="yourname"
-             class="px-4 py-2 bg-transparent text-black dark:text-white outline-none placeholder-gray-500 dark:placeholder-gray-400">
-      <span class="px-4 text-gray-500 dark:text-gray-400">#example.com</span>
+             class="px-4 py-2 bg-transparent text-white outline-none placeholder-gray-400">
+      <span class="px-4 text-gray-400">#example.com</span>
       <button class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-full font-medium text-white transition">
         Create
       </button>
     </div>
   </section>
 
-  <!-- Feature Cards -->
-  <section class="py-12 px-6 bg-white dark:bg-black transition-colors duration-500">
+  <!-- Feature Cards (hidden by default) -->
+  <section id="featuresSection" class="py-12 px-6 bg-black hidden transition-colors duration-500">
     <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       
-      <div class="bg-gray-100 dark:bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
-        <h3 class="text-xl font-semibold mb-2 flex items-center text-black dark:text-white">
+      <div class="bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
+        <h3 class="text-xl font-semibold mb-2 flex items-center text-white">
           <span class="text-blue-500 mr-2">#</span> Placeholder 1
         </h3>
-        <p class="text-gray-700 dark:text-gray-400 text-sm">Some placeholder description text here.</p>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
 
-      <div class="bg-gray-100 dark:bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
-        <h3 class="text-xl font-semibold mb-2 flex items-center text-black dark:text-white">
+      <div class="bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
+        <h3 class="text-xl font-semibold mb-2 flex items-center text-white">
           <span class="text-blue-500 mr-2">★</span> Placeholder 2
         </h3>
-        <p class="text-gray-700 dark:text-gray-400 text-sm">Some placeholder description text here.</p>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
 
-      <div class="bg-gray-100 dark:bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
-        <h3 class="text-xl font-semibold mb-2 flex items-center text-black dark:text-white">
+      <div class="bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
+        <h3 class="text-xl font-semibold mb-2 flex items-center text-white">
           <span class="text-blue-500 mr-2">⚡</span> Placeholder 3
         </h3>
-        <p class="text-gray-700 dark:text-gray-400 text-sm">Some placeholder description text here.</p>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
 
-      <div class="bg-gray-100 dark:bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
-        <h3 class="text-xl font-semibold mb-2 flex items-center text-black dark:text-white">
+      <div class="bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition-colors duration-500">
+        <h3 class="text-xl font-semibold mb-2 flex items-center text-white">
           <span class="text-blue-500 mr-2">✔</span> Placeholder 4
         </h3>
-        <p class="text-gray-700 dark:text-gray-400 text-sm">Some placeholder description text here.</p>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- Dark Mode Toggle Script -->
+  <!-- PayPal Modal -->
+  <div id="paypalModal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex justify-center items-center z-50">
+    <div class="bg-gray-900 p-6 rounded-2xl shadow-lg max-w-md w-full text-center relative">
+      <button id="closeModal" class="absolute top-3 right-3 text-gray-400 hover:text-white text-xl">&times;</button>
+      <h2 class="text-2xl font-bold mb-4 text-white">Complete Your Purchase</h2>
+      <iframe src="https://www.paypal.me/OhhSeven" class="w-full h-96 rounded-lg"></iframe>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script>
     const toggle = document.getElementById('modeToggle');
     toggle.addEventListener('click', () => {
       document.documentElement.classList.toggle('dark');
       toggle.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
     });
+
+    // Features toggle
+    const featuresTab = document.getElementById('featuresTab');
+    const featuresSection = document.getElementById('featuresSection');
+    featuresTab.addEventListener('click', (e) => {
+      e.preventDefault();
+      featuresSection.classList.toggle('hidden');
+    });
+
+    // PayPal modal
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    const paypalModal = document.getElementById('paypalModal');
+    const closeModal = document.getElementById('closeModal');
+
+    buyNowBtn.addEventListener('click', () => {
+      paypalModal.classList.remove('hidden');
+    });
+
+    closeModal.addEventListener('click', () => {
+      paypalModal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === paypalModal) {
+        paypalModal.classList.add('hidden');
+      }
+    });
   </script>
 
 </body>
 </html>
-
-
