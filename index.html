@@ -1,77 +1,154 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Placeholder Site</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Tailwind: use class-based dark mode
-    tailwind.config = { darkMode: 'class' };
+    // Tailwind Dark Mode Setup
+    tailwind.config = {
+      darkMode: 'class'
+    }
   </script>
-  <style>
-    /* Helps anchor targets land below the fixed header */
-    section { scroll-margin-top: 5rem; }
-  </style>
 </head>
-<body class="bg-white dark:bg-black text-black dark:text-white font-sans transition-colors duration-300">
+<body class="bg-black dark:bg-black text-white dark:text-white font-sans transition-colors duration-300">
 
-  <!-- Header / Navbar -->
-  <header class="w-full fixed top-0 left-0 z-50 bg-white dark:bg-black border-b border-gray-300 dark:border-gray-800">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+  <!-- Header -->
+  <header class="w-full bg-black dark:bg-black border-b border-gray-800 fixed top-0 left-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
       <!-- Logo -->
-      <div class="text-xl font-bold text-black dark:text-white">YourLogo</div>
-
-      <!-- Nav -->
-      <nav class="hidden md:flex space-x-8 text-gray-700 dark:text-gray-300">
-        <a href="#home" class="hover:text-black dark:hover:text-white transition">Home</a>
-        <a href="#features" class="hover:text-black dark:hover:text-white transition">Features</a>
-        <a href="#rules" class="hover:text-black dark:hover:text-white transition">Rules</a>
-        <a href="#contact" class="hover:text-black dark:hover:text-white transition">Contact</a>
+      <div class="text-xl font-bold text-white">YourLogo</div>
+      
+      <!-- Nav links -->
+      <nav class="hidden md:flex space-x-8 text-gray-300">
+        <a href="#home" class="hover:text-white transition">Home</a>
+        <a href="#features" class="hover:text-white transition">Features</a>
+        <a href="#rules" class="hover:text-white transition">Rules</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
       </nav>
 
       <!-- Actions -->
-      <div class="flex items-center space-x-3">
-        <button id="modeToggle"
-          class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-black dark:text-white px-3 py-1 rounded-full transition"
-          aria-label="Toggle color mode">🌙</button>
-
-        <button id="buyNowBtn"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
+      <div class="flex space-x-3">
+        <button id="modeToggle" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full transition">
+          🌙
+        </button>
+        <button id="buyNow" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
           Buy Now
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Spacer (for fixed header) -->
-  <div class="h-16"></div>
+  <!-- Spacer -->
+  <div class="h-20"></div>
 
-  <!-- Home / Hero -->
-  <section id="home" class="px-6 py-12 text-center">
-    <h1 class="text-4xl sm:text-5xl font-bold mb-5">
+  <!-- Hero -->
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <h1 class="text-5xl sm:text-6xl font-bold mb-6">
       A sharp new way to <span class="bg-blue-700 text-white px-3 py-1 rounded-lg">advertise</span>
     </h1>
-    <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-400 max-w-2xl mx-auto mb-6">
-      Run your own ads, control your exposure, and join a network of self-hosted promotions.
+    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mb-8">
+      Run your own ads, control your exposure, and join a network of self-hosted promotions.  
       Built for visibility, simplicity, and growth.
     </p>
 
-    <div class="mx-auto w-full max-w-xl flex items-center bg-gray-100 dark:bg-gray-900 rounded-full overflow-hidden shadow transition-colors">
+    <div class="flex items-center bg-gray-900 rounded-full overflow-hidden shadow-lg">
       <input type="text" placeholder="yourname"
-             class="flex-1 px-4 py-2 bg-transparent text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 outline-none">
-      <span class="px-4 text-gray-600 dark:text-gray-400">#example.com</span>
-      <button class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-full font-medium text-white transition m-1">
+             class="px-4 py-3 bg-transparent text-gray-300 outline-none">
+      <span class="px-4 text-gray-500">#example.com</span>
+      <button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-medium transition">
         Create
       </button>
     </div>
   </section>
 
   <!-- Features -->
-  <section id="features" class="py-12 px-6 bg-white dark:bg-black">
+  <section id="features" class="py-20 px-6 bg-black dark:bg-black">
     <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-gray-100 dark:bg-gray-900 rounded-2xl p-5 shadow hover:shadow-blue-500/20 transition">
-        <h3 class="text-xl font-semibold mb-2 flex items-center text-black dark:text-white">
+      <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
           <span class="text-blue-500 mr-2">#</span> Placeholder 1
         </h3>
-        <p class="text-gray-700 dark:text-gray-400 tex
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
+      <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
+          <span class="text-blue-500 mr-2">★</span> Placeholder 2
+        </h3>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
+      <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
+          <span class="text-blue-500 mr-2">⚡</span> Placeholder 3
+        </h3>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
+      <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
+        <h3 class="text-xl font-semibold mb-2 flex items-center">
+          <span class="text-blue-500 mr-2">✔</span> Placeholder 4
+        </h3>
+        <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rules -->
+  <section id="rules" class="py-20 px-6 bg-black dark:bg-black text-center">
+    <h2 class="text-4xl font-bold mb-6">Rules Placeholder</h2>
+    <p class="text-gray-400 max-w-2xl mx-auto">
+      Some placeholder rules text here. Replace this with your real rules.
+    </p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 px-6 bg-black dark:bg-black text-center">
+    <h2 class="text-4xl font-bold mb-6">Contact Placeholder</h2>
+    <p class="text-gray-400 max-w-2xl mx-auto">
+      Some placeholder contact text here. Replace this with your real contact info.
+    </p>
+  </section>
+
+  <!-- Buy Now Modal -->
+  <div id="buyModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg max-w-sm w-full text-center">
+      <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Buy Now</h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-6">
+        You’ll be redirected to PayPal to complete your purchase.
+      </p>
+      <a href="https://paypal.me/OhhSeven" target="_blank"
+         class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full transition">
+        Go to PayPal
+      </a>
+      <button id="closeModal" class="mt-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 block mx-auto">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Dark mode toggle
+    const html = document.documentElement;
+    const modeToggle = document.getElementById("modeToggle");
+
+    modeToggle.addEventListener("click", () => {
+      html.classList.toggle("dark");
+      modeToggle.textContent = html.classList.contains("dark") ? "🌙" : "☀️";
+    });
+
+    // Modal toggle
+    const buyNow = document.getElementById("buyNow");
+    const buyModal = document.getElementById("buyModal");
+    const closeModal = document.getElementById("closeModal");
+
+    buyNow.addEventListener("click", () => {
+      buyModal.classList.remove("hidden");
+    });
+
+    closeModal.addEventListener("click", () => {
+      buyModal.classList.add("hidden");
+    });
+  </script>
+</body>
+</html>
