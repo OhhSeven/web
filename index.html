@@ -6,44 +6,35 @@
   <title>Placeholder Site</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Tailwind Dark Mode Setup
-    tailwind.config = {
-      darkMode: 'class'
-    }
+    tailwind.config = { darkMode: 'class' };
   </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 5rem; } /* offset for fixed header */
+  </style>
 </head>
 <body class="bg-black dark:bg-black text-white dark:text-white font-sans transition-colors duration-300">
 
   <!-- Header -->
   <header class="w-full bg-black dark:bg-black border-b border-gray-800 fixed top-0 left-0 z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-      <!-- Logo -->
       <div class="text-xl font-bold text-white">YourLogo</div>
-      
-      <!-- Nav links -->
       <nav class="hidden md:flex space-x-8 text-gray-300">
         <a href="#home" class="hover:text-white transition">Home</a>
         <a href="#features" class="hover:text-white transition">Features</a>
         <a href="#rules" class="hover:text-white transition">Rules</a>
         <a href="#contact" class="hover:text-white transition">Contact</a>
       </nav>
-
-      <!-- Actions -->
       <div class="flex space-x-3">
-        <button id="modeToggle" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full transition">
-          🌙
-        </button>
-        <button id="buyNow" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
-          Buy Now
-        </button>
+        <button id="modeToggle" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full transition">🌙</button>
+        <button id="buyNow" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">Buy Now</button>
       </div>
     </div>
   </header>
 
-  <!-- Spacer -->
   <div class="h-20"></div>
 
-  <!-- Hero -->
+  <!-- Sections -->
   <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6">
     <h1 class="text-5xl sm:text-6xl font-bold mb-6">
       A sharp new way to <span class="bg-blue-700 text-white px-3 py-1 rounded-lg">advertise</span>
@@ -52,102 +43,83 @@
       Run your own ads, control your exposure, and join a network of self-hosted promotions.  
       Built for visibility, simplicity, and growth.
     </p>
-
     <div class="flex items-center bg-gray-900 rounded-full overflow-hidden shadow-lg">
-      <input type="text" placeholder="yourname"
-             class="px-4 py-3 bg-transparent text-gray-300 outline-none">
+      <input type="text" placeholder="yourname" class="px-4 py-3 bg-transparent text-gray-300 outline-none">
       <span class="px-4 text-gray-500">#example.com</span>
-      <button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-medium transition">
-        Create
-      </button>
+      <button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-medium transition">Create</button>
     </div>
   </section>
 
-  <!-- Features -->
   <section id="features" class="py-20 px-6 bg-black dark:bg-black">
     <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
-        <h3 class="text-xl font-semibold mb-2 flex items-center">
-          <span class="text-blue-500 mr-2">#</span> Placeholder 1
-        </h3>
+        <h3 class="text-xl font-semibold mb-2 flex items-center"><span class="text-blue-500 mr-2">#</span> Placeholder 1</h3>
         <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
       <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
-        <h3 class="text-xl font-semibold mb-2 flex items-center">
-          <span class="text-blue-500 mr-2">★</span> Placeholder 2
-        </h3>
+        <h3 class="text-xl font-semibold mb-2 flex items-center"><span class="text-blue-500 mr-2">★</span> Placeholder 2</h3>
         <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
       <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
-        <h3 class="text-xl font-semibold mb-2 flex items-center">
-          <span class="text-blue-500 mr-2">⚡</span> Placeholder 3
-        </h3>
+        <h3 class="text-xl font-semibold mb-2 flex items-center"><span class="text-blue-500 mr-2">⚡</span> Placeholder 3</h3>
         <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
       <div class="bg-gray-900 dark:bg-gray-900 rounded-2xl p-6 shadow hover:shadow-blue-500/20 transition">
-        <h3 class="text-xl font-semibold mb-2 flex items-center">
-          <span class="text-blue-500 mr-2">✔</span> Placeholder 4
-        </h3>
+        <h3 class="text-xl font-semibold mb-2 flex items-center"><span class="text-blue-500 mr-2">✔</span> Placeholder 4</h3>
         <p class="text-gray-400 text-sm">Some placeholder description text here.</p>
       </div>
     </div>
   </section>
 
-  <!-- Rules -->
-  <section id="rules" class="py-20 px-6 bg-black dark:bg-black text-center">
+  <section id="rules" class="py-20 px-6 text-center bg-black dark:bg-black">
     <h2 class="text-4xl font-bold mb-6">Rules Placeholder</h2>
-    <p class="text-gray-400 max-w-2xl mx-auto">
-      Some placeholder rules text here. Replace this with your real rules.
-    </p>
+    <p class="text-gray-400 max-w-2xl mx-auto">Some placeholder rules text here. Replace this with your real rules.</p>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="py-20 px-6 bg-black dark:bg-black text-center">
+  <section id="contact" class="py-20 px-6 text-center bg-black dark:bg-black">
     <h2 class="text-4xl font-bold mb-6">Contact Placeholder</h2>
-    <p class="text-gray-400 max-w-2xl mx-auto">
-      Some placeholder contact text here. Replace this with your real contact info.
-    </p>
+    <p class="text-gray-400 max-w-2xl mx-auto">Some placeholder contact text here. Replace this with your real contact info.</p>
   </section>
 
   <!-- Buy Now Modal -->
   <div id="buyModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
     <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg max-w-sm w-full text-center">
+      <button id="closeModal" class="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-200">&times;</button>
       <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Buy Now</h2>
-      <p class="text-gray-600 dark:text-gray-300 mb-6">
-        You’ll be redirected to PayPal to complete your purchase.
-      </p>
-      <a href="https://paypal.me/OhhSeven" target="_blank"
-         class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full transition">
-        Go to PayPal
-      </a>
-      <button id="closeModal" class="mt-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 block mx-auto">
-        Cancel
-      </button>
+      <p class="text-gray-600 dark:text-gray-300 mb-6">You’ll be redirected to PayPal to complete your purchase.</p>
+      <a href="https://paypal.me/OhhSeven" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full transition block">Go to PayPal</a>
     </div>
   </div>
 
-  <!-- Scripts -->
   <script>
-    // Dark mode toggle
-    const html = document.documentElement;
-    const modeToggle = document.getElementById("modeToggle");
+    document.addEventListener("DOMContentLoaded", () => {
+      const html = document.documentElement;
+      const modeToggle = document.getElementById("modeToggle");
+      const buyNow = document.getElementById("buyNow");
+      const buyModal = document.getElementById("buyModal");
+      const closeModal = document.getElementById("closeModal");
 
-    modeToggle.addEventListener("click", () => {
-      html.classList.toggle("dark");
-      modeToggle.textContent = html.classList.contains("dark") ? "🌙" : "☀️";
-    });
+      // Light/Dark toggle
+      modeToggle.addEventListener("click", () => {
+        html.classList.toggle("dark");
+        modeToggle.textContent = html.classList.contains("dark") ? "🌙" : "☀️";
+      });
 
-    // Modal toggle
-    const buyNow = document.getElementById("buyNow");
-    const buyModal = document.getElementById("buyModal");
-    const closeModal = document.getElementById("closeModal");
-
-    buyNow.addEventListener("click", () => {
-      buyModal.classList.remove("hidden");
-    });
-
-    closeModal.addEventListener("click", () => {
-      buyModal.classList.add("hidden");
+      // Buy Now Modal
+      buyNow.addEventListener("click", () => {
+        buyModal.classList.remove("hidden");
+        buyModal.classList.add("flex");
+      });
+      closeModal.addEventListener("click", () => {
+        buyModal.classList.add("hidden");
+        buyModal.classList.remove("flex");
+      });
+      buyModal.addEventListener("click", e => {
+        if(e.target === buyModal){
+          buyModal.classList.add("hidden");
+          buyModal.classList.remove("flex");
+        }
+      });
     });
   </script>
 </body>
