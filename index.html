@@ -42,66 +42,39 @@
   </header>
 
 
-  <div class="h-24"></div>
+  <div class="h-17"></div>
 
 
-  <section id="home" class="px-6 py-10">
-    <h2 class="text-4xl font-bold mb-6 text-center text-black dark:text-white">Advertisements</h2>
+<section id="home" class="px-6 pt-20 pb-40 flex justify-center">
+  <div class="bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow-2xl rounded-3xl 
+            flex flex-col items-center p-10 w-[900px]">
 
 
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <h2 class="text-5xl font-extrabold mb-8 text-center text-black dark:text-white">
+      ADVERTISEMENT
+    </h2>
 
-      <div class="rounded-2xl bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow p-5 flex flex-col h-[480px]">
+    <h3 class="text-3xl font-extrabold mb-8 text-center text-black dark:text-white">
+      Example ad
+    </h3>
 
-        <img src="https://cdn.discordapp.com/icons/1272248649946107917/a60cd3e56c08c5a9154d677abba5ba1a.png?size=4096" alt="Solarity"
-             class="w-full h-48 object-contain rounded-lg border border-gray-200 dark:border-gray-800">
-        <p class="text-center text-base text-gray-700 dark:text-gray-300 mt-5 px-2">
-          Solarity
-        </p>
-        <p class="text-center text-base text-gray-700 dark:text-gray-300 mt-5 px-2">
-          Join plz
-        </p>
-        <button class="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg transition text-sm"
-                data-copy="play.solaritymc.fun">Click to copy ip</button>
-      </div>
+    <img src="https://cdn.discordapp.com/attachments/1092809134891597908/1411816793110085853/Z.png?ex=68b60859&is=68b4b6d9&hm=dc8d07d47f985ac5d95aa13ab650d5629c8fd01472498400164a33a03fbfb2f5&" 
+         alt="Example"
+         class="w-[500px] h-[300px] object-contain rounded-xl mb-6">
 
+    <p class="text-center text-xl text-gray-700 dark:text-gray-300 mt-4">
+      This is the description of your ad.<br>
+      You can add whatever you want to describe whatever you're advertising.<br>
+      Only $10 for 2 weeks! ✌️<br>
+      -
+    </p>
 
-      <div class="rounded-2xl bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow p-5 flex flex-col h-[480px]">
-
-        <img src="data:image/png;base64,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" alt="Your ad!"
-             class="w-full h-48 object-contain rounded-lg border border-gray-200 dark:border-gray-800"> 
-        <p class="text-center text-base text-gray-700 dark:text-gray-300 mt-5 px-2">
-          This could be your ad (wow). Just give me your money and it's all yours.
-        </p>
-        <button class="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg transition text-sm"
-                data-copy="NA">Click to copy</button>
-      </div>  
-
-
-      <div class="rounded-2xl bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow p-5 flex flex-col h-[480px]">
-
-        <img src="data:image/png;base64,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" alt="Your ad!"
-             class="w-full h-48 object-contain rounded-lg border border-gray-200 dark:border-gray-800">
-        <p class="text-center text-base text-gray-700 dark:text-gray-300 mt-5 px-2">
-          This could be your ad (wow). Just give me your money and it's all yours.
-        </p>
-        <button class="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg transition text-sm"
-                data-copy="NA">Click to copy</button>
-      </div>
-
-      <div class="rounded-2xl bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow p-5 flex flex-col h-[480px]">
-
-        <img src="data:image/png;base64,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" alt="Your ad!"
-             class="w-full h-48 object-contain rounded-lg border border-gray-200 dark:border-gray-800">
-        <p class="text-center text-base text-gray-700 dark:text-gray-300 mt-5 px-2">
-          This could be your ad (wow). Just give me your money and it's all yours.
-        </p>
-        <button class="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg transition text-sm"
-                data-copy="NA">Click to copy</button>
-      </div>
-    </div>
-  </section>
-
+    <button class="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl transition text-xl font-bold"
+            data-copy="Example">
+      🔗 Click to copy
+    </button>
+  </div>
+</section>
 
   <section id="about" class="px-6 py-12">
 
@@ -109,7 +82,7 @@
       A sharp new way to <span class="bg-blue-700 text-white px-3 py-1 rounded-lg">advertise</span>
     </h1>
     <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-400 max-w-2xl mx-auto text-center mb-10">
-      Run your own ads, control your exposure, and join a network of self-hosted promotions for only $5.
+      See that ad up there? That could be yours. Run your own ad, control your exposure for only $10 for 2 weeks.
     </p>
 
 
@@ -156,7 +129,7 @@
           </span>
           <div>
             <h4 class="font-semibold text-black dark:text-white mb-1">Low prices</h4>
-            <p class="text-sm text-gray-700 dark:text-gray-400">Very low prices bc i'm not a brokie.</p>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Very low prices bc i'm not a brokie. (1 ad = $10)</p>
           </div>
         </div>
       </div>
@@ -304,10 +277,10 @@
   Please make sure you have read and understood the Rules before buying.
 </p>
 <p class="text-gray-700 dark:text-gray-400 text-center">
-  A standard ad will cost you the low price of $5 per week.
+  A standard ad will cost you the low price of $10 for 2 weeks.
 </p>
 <p class="text-gray-700 dark:text-gray-400 text-center">
-  If you're interested in buying an advertisment, please contact me on Discord - 'ohhsevenlol'.
+  If you're interested in buying an advertisement, please contact me on Discord - 'ohhsevenlol'.
 </p>
 
   <script>
@@ -339,7 +312,6 @@
   </script>
 </body>
 </html>
-
 
 
 
