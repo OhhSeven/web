@@ -8,10 +8,145 @@
   <script>tailwind.config = { darkMode: 'class' };</script>
   <style>
     html { scroll-behavior: smooth; }
-    section { scroll-margin-top: 5rem; } 
+    section { scroll-margin-top: 5rem; }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      background: black; /* fallback */
+      overflow-x: hidden;
+    }
+
+    /* Background image layer */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://cdn.discordapp.com/attachments/1092809134891597908/1415075961052987593/image.png?ex=68c1e3af&is=68c0922f&hm=e5f4684e114200a4e9d1d0114b5ee2147626b1d903b42c5fd149c5600632a6db&");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      z-index: -2; /* sits behind everything */
+    }
+
+    /* Fade overlay layer */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 10%,
+        rgba(0,0,0,0.8) 50%,
+        rgba(0,0,0,1) 100%
+      );
+      z-index: -1; /* above image, but below content */
+      pointer-events: none;
+    }
   </style>
 </head>
-<body class="bg-white dark:bg-black text-black dark:text-white font-sans transition-colors duration-300">
+
+<!-- Floating button -->
+<div id="popupButton" class="fixed bottom-6 right-6 z-50 cursor-pointer">
+  <img src="https://cdn.discordapp.com/attachments/1092809134891597908/1415076944378204321/mnelp.png?ex=68c1e49a&is=68c0931a&hm=db866ee597919bccbb9aa3f83344f67f44baa3f95fe04fbfc26b08179165bc7b&" 
+       alt="Open Popup"
+       class="w-12 h-12 rounded-lg shadow-lg hover:scale-110 transition-transform duration-200">
+</div>
+
+<!-- Popup overlay -->
+<div id="popupOverlay" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
+  <div class="bg-white dark:bg-[#111418] rounded-2xl shadow-xl p-8 max-w-lg w-full mx-4 relative overflow-hidden">
+
+    <!-- Bouncing image -->
+    <img id="bouncingImage" 
+         src="https://cdn.discordapp.com/attachments/1092809134891597908/1415076944378204321/mnelp.png?ex=68c1e49a&is=68c0931a&hm=db866ee597919bccbb9aa3f83344f67f44baa3f95fe04fbfc26b08179165bc7b&" 
+         alt="Bouncing Logo"
+         class="absolute w-20 h-10 pointer-events-none select-none">
+
+    <!-- Popup content -->
+    <div class="relative z-10 text-center mt-6">
+      <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Melp Is Cool!!!</h2>
+      <p class="text-gray-700 dark:text-gray-300 mb-6">
+        Melp has built many cool things including the this websites background image. Visit Melp's build profile below!
+      </p>
+
+      <!-- Customisable link button -->
+      <a href="https://discord.gg/8T8W5YxzT2" target="_blank" 
+         class="inline-block mt-4 px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition">
+        Visit Link
+      </a>
+    </div>
+
+    <!-- Close button -->
+    <button id="closePopup"
+      class="absolute top-3 right-3 px-4 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition">
+      ✕
+    </button>
+  </div>
+</div>
+
+<script>
+  const popupButton = document.getElementById('popupButton');
+  const popupOverlay = document.getElementById('popupOverlay');
+  const closePopup = document.getElementById('closePopup');
+  const bouncingImage = document.getElementById('bouncingImage');
+
+  let dx = 2;
+  let dy = 2;
+  let x = 50;
+  let y = 50;
+  let animationId;
+
+  popupButton.addEventListener('click', () => {
+    popupOverlay.classList.remove('hidden');
+    startBouncing();
+  });
+
+  closePopup.addEventListener('click', () => {
+    popupOverlay.classList.add('hidden');
+    cancelAnimationFrame(animationId);
+  });
+
+  popupOverlay.addEventListener('click', (e) => {
+    if (e.target === popupOverlay) {
+      popupOverlay.classList.add('hidden');
+      cancelAnimationFrame(animationId);
+    }
+  });
+
+  function startBouncing() {
+    const container = bouncingImage.parentElement;
+
+    function animate() {
+      const containerRect = container.getBoundingClientRect();
+      const imgRect = bouncingImage.getBoundingClientRect();
+
+      x += dx;
+      y += dy;
+
+      if (x <= 0 || x + imgRect.width >= containerRect.width) dx *= -1;
+      if (y <= 0 || y + imgRect.height >= containerRect.height) dy *= -1;
+
+      bouncingImage.style.left = x + "px";
+      bouncingImage.style.top = y + "px";
+
+      animationId = requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+</script>
+
+</script>
+
+</script>
+
+</script>
+
+<body class="bg-white/80 dark:bg-black/80 text-black dark:text-white font-sans transition-colors duration-300">
+
+  </style>
 
   <header class="fixed top-0 inset-x-0 z-50">
     <div class="mx-auto max-w-2xl">
@@ -312,6 +447,7 @@
   </script>
 </body>
 </html>
+
 
 
 
