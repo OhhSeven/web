@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advertising</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <style>
+    html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 5rem; }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      background: black; /* fallback */
+      overflow-x: hidden;
+    }
+
+    /* Background image layer */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://cdn.discordapp.com/attachments/1092809134891597908/1415075961052987593/image.png?ex=68c1e3af&is=68c0922f&hm=e5f4684e114200a4e9d1d0114b5ee2147626b1d903b42c5fd149c5600632a6db&");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      z-index: -2; /* sits behind everything */
+    }
+
+    /* Fade overlay layer */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 10%,
+        rgba(0,0,0,0.8) 50%,
+        rgba(0,0,0,1) 100%
+      );
+      z-index: -1; /* above image, but below content */
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<!-- Floating button -->
+<div id="popupButton" class="fixed bottom-6 right-6 z-50 cursor-pointer">
+  <img src="https://cdn.discordapp.com/attachments/1092809134891597908/1415076944378204321/mnelp.png?ex=68c1e49a&is=68c0931a&hm=db866ee597919bccbb9aa3f83344f67f44baa3f95fe04fbfc26b08179165bc7b&" 
+       alt="Open Popup"
+       class="w-12 h-12 rounded-lg shadow-lg hover:scale-110 transition-transform duration-200">
+</div>
+
+<!-- Popup overlay -->
+<div id="popupOverlay" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
+  <div class="bg-white dark:bg-[#111418] rounded-2xl shadow-xl p-8 max-w-lg w-full mx-4 relative overflow-hidden">
+
+    <!-- Bouncing image -->
+    <img id="bouncingImage" 
+         src="https://cdn.discordapp.com/attachments/1092809134891597908/1415076944378204321/mnelp.png?ex=68c1e49a&is=68c0931a&hm=db866ee597919bccbb9aa3f83344f67f44baa3f95fe04fbfc26b08179165bc7b&" 
+         alt="Bouncing Logo"
+         class="absolute w-20 h-10 pointer-events-none select-none">
+
+    <!-- Popup content -->
+    <div class="relative z-10 text-center mt-6">
+      <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Melp Is Cool!!!</h2>
+      <p class="text-gray-700 dark:text-gray-300 mb-6">
+        Melp has built many cool things including this websites background image. Visit Melp's build profile below!
+      </p>
+
+      <!-- Customisable link button -->
+      <a href="https://discord.gg/8T8W5YxzT2" target="_blank" 
+         class="inline-block mt-4 px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition">
+        Visit Link
+      </a>
+    </div>
+
+    <!-- Close button -->
+    <button id="closePopup"
+      class="absolute top-3 right-3 px-4 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition">
+      ✕
+    </button>
+  </div>
+</div>
+
+<script>
+  const popupButton = document.getElementById('popupButton');
+  const popupOverlay = document.getElementById('popupOverlay');
+  const closePopup = document.getElementById('closePopup');
+  const bouncingImage = document.getElementById('bouncingImage');
+
+  let dx = 2;
+  let dy = 2;
+  let x = 50;
+  let y = 50;
+  let animationId;
+
+  popupButton.addEventListener('click', () => {
+    popupOverlay.classList.remove('hidden');
+    startBouncing();
+  });
+
+  closePopup.addEventListener('click', () => {
+    popupOverlay.classList.add('hidden');
+    cancelAnimationFrame(animationId);
+  });
+
+  popupOverlay.addEventListener('click', (e) => {
+    if (e.target === popupOverlay) {
+      popupOverlay.classList.add('hidden');
+      cancelAnimationFrame(animationId);
+    }
+  });
+
+  function startBouncing() {
+    const container = bouncingImage.parentElement;
+
+    function animate() {
+      const containerRect = container.getBoundingClientRect();
+      const imgRect = bouncingImage.getBoundingClientRect();
+
+      x += dx;
+      y += dy;
+
+      if (x <= 0 || x + imgRect.width >= containerRect.width) dx *= -1;
+      if (y <= 0 || y + imgRect.height >= containerRect.height) dy *= -1;
+
+      bouncingImage.style.left = x + "px";
+      bouncingImage.style.top = y + "px";
+
+      animationId = requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+</script>
+
+</script>
+
+</script>
+
+</script>
+
+<body class="bg-white/80 dark:bg-black/80 text-black dark:text-white font-sans transition-colors duration-300">
+
+  </style>
+
+  <header class="fixed top-0 inset-x-0 z-50">
+    <div class="mx-auto max-w-2xl">
+      <div class="mt-3 mx-3 rounded-2xl border border-gray-200/60 dark:border-gray-800/60 bg-white/70 dark:bg-black/40 backdrop-blur supports-[backdrop-filter]:backdrop-blur px-4 sm:px-6 py-2.5">
+        <div class="flex items-center justify-between">
+
+          <a href="#home" class="text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white">Advertise</a>
+
+
+          <nav class="hidden md:flex items-center gap-6 text-sm text-gray-700 dark:text-gray-300">
+            <a href="#home" class="hover:text-black dark:hover:text-white transition">Home</a>
+            <a href="#about" class="hover:text-black dark:hover:text-white transition">About</a>
+            <a href="#rules" class="hover:text-black dark:hover:text-white transition">Rules</a>
+            <a href="#contact" class="hover:text-black dark:hover:text-white transition">Contact</a>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <button id="modeToggle"
+              class="rounded-full px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-black dark:text-white transition">🌙</button>
+            <a href="#contact"
+               class="inline-flex items-center rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 transition">
+              Buy Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="h-17"></div>
+
+
+<section id="home" class="px-6 pt-20 pb-40 flex justify-center">
+  <div class="bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow-2xl rounded-3xl 
+            flex flex-col items-center p-10 w-[900px]">
+
+
+    <h2 class="text-5xl font-extrabold mb-8 text-center text-black dark:text-white">
+      ADVERTISEMENT
+    </h2>
+
+    <h3 class="text-3xl font-extrabold mb-8 text-center text-black dark:text-white">
+      Example ad
+    </h3>
+
+    <img src="https://cdn.discordapp.com/attachments/1092809134891597908/1411816793110085853/Z.png?ex=68b60859&is=68b4b6d9&hm=dc8d07d47f985ac5d95aa13ab650d5629c8fd01472498400164a33a03fbfb2f5&" 
+         alt="Example"
+         class="w-[500px] h-[300px] object-contain rounded-xl mb-6">
+
+    <p class="text-center text-xl text-gray-700 dark:text-gray-300 mt-4">
+      This is the description of your ad.<br>
+      You can add whatever you want to describe whatever you're advertising.<br>
+      Only $10 for 2 weeks! ✌️<br>
+      -
+    </p>
+
+    <button class="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl transition text-xl font-bold"
+            data-copy="Example">
+      🔗 Click to copy
+    </button>
+  </div>
+</section>
+
+  <section id="about" class="px-6 py-12">
+
+    <h1 class="text-6xl sm:text-7xl font-bold mb-6 text-center text-black dark:text-white">
+      A sharp new way to <span class="bg-blue-700 text-white px-3 py-1 rounded-lg">advertise</span>
+    </h1>
+    <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-400 max-w-2xl mx-auto text-center mb-10">
+      See that ad up there? That could be yours. Run your own ad, control your exposure for only $10 for 2 weeks.
+    </p>
+
+
+    <h3 class="text-3xl font-semibold mb-6 text-center">Features</h3>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M10 3h2l-.6 3H14l.6-3h2l-.6 3h3v2h-3.4l-.6 3H18v2h-3.6l-.6 3H12l.6-3H10l-.6 3H7.4l.6-3H5v-2h3.4l.6-3H6v-2h3.6l.6-3zM9.8 11l-.6 3h3l.6-3h-3z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Automatic</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">It's not actually automatic, i gotta ad your add but its the same shit rly</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M3 5a2 2 0 012-2h14a2 2 0 012 2v3H3V5zm0 6h18v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3zm4 4h2v2H7v-2zm0-10h2v2H7V5z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Self Hosting</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Idrk what this means tbh</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 2l7 4v6c0 5-3.8 9.4-7 10-3.2-.6-7-5-7-10V6l7-4z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Refunds</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">No refunds unless the service does not deliver properly (not really a feature but yk)</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 1a11 11 0 100 22 11 11 0 000-22zm1 11V6h-2v7h6v-2h-4z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Low prices</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Very low prices bc i'm not a brokie. (1 ad = $10)</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 2a5 5 0 00-5 5v3H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2h-2V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Cool Features</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">I'm running out of ideas</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 2l3.1 6.3L22 9.3l-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Anti-DDOS</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">This probably wont be hacked or DOSed!</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M16 11a4 4 0 10-8 0 4 4 0 008 0zm-9 6a6 6 0 0110 0v2H7v-2z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Advertise anything</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Thats a lie - but you can ad most things!!</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-6 py-5">
+        <div class="flex items-start gap-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20 text-blue-400">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </span>
+          <div>
+            <h4 class="font-semibold text-black dark:text-white mb-1">Lightning Fast</h4>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Built for speed and efficiency!!!!!!!!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <h3 class="text-5xl font-bold text-center mb-8">What Our Users Say</h3>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-8 py-10 text-center">
+        <img class="w-20 h-20 rounded-full mx-auto mb-3 object-cover ring-2 ring-gray-300/30" src="https://cdn.discordapp.com/avatars/1281269452880613379/5fb51c7ad5d23e2d49a815ae71f4e931.png?size=1024" alt="User 1">
+        <h4 class="font-semibold text-lg">Carkeys</h4>
+        <p class="text-xs text-gray-500 mb-4">cartsups owner</p>
+        <div class="relative text-left mx-auto max-w-[28rem]">
+          <span class="absolute -left-4 -top-1 text-2xl text-gray-400">❝</span>
+          <p class="text-gray-400 leading-7">
+            my king daddy cartsup approves so u get the goats approval 👍
+          </p>
+          <p class="text-gray-400 leading-7"></p>
+            (make sure to use code carkeysz in the fortnite item shop)
+          </p>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-8 py-10 text-center">
+        <img class="w-20 h-20 rounded-full mx-auto mb-3 object-cover ring-2 ring-gray-300/30" src="https://cdn.discordapp.com/avatars/1011270155470372874/b5ccaf659ae1efa63277b39b13136c47.png?size=1024" alt="User 2">
+        <h4 class="font-semibold text-lg">Melp</h4>
+        <p class="text-xs text-gray-500 mb-4">Ragebaiter</p>
+        <div class="relative text-left mx-auto max-w-[28rem]">
+          <span class="absolute -left-4 -top-1 text-2xl text-gray-400">❝</span>
+          <p class="text-gray-400 leading-7">
+            Whats https://www.ohhseven.com/ for me?
+          </p>
+          <p class="text-gray-400 leading-7"></p>
+            In math my solution 😊 ❤️ 
+          </p>
+          <p class="text-gray-400 leading-7"></p>
+            In geography my world 🌍 🥰 
+          </p>
+          <p class="text-gray-400 leading-7"></p>
+            In history my kingdom 👑 😋
+          </p>
+          <p class="text-gray-400 leading-7"></p>
+            In english my words ✍️ 😜
+          </p>
+        </div>
+      </div>
+      <div class="rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow px-8 py-10 text-center">
+        <img class="w-20 h-20 rounded-full mx-auto mb-3 object-cover ring-2 ring-gray-300/30" src="https://cdn.discordapp.com/avatars/926073012975992833/b0d047ffe74942d60f2cd3c538eaa138.png?size=1024" alt="User 3">
+        <h4 class="font-semibold text-lg">Smufer</h4>
+        <p class="text-xs text-gray-500 mb-4">Smurf</p>
+        <div class="relative text-left mx-auto max-w-[28rem]">
+          <span class="absolute -left-4 -top-1 text-2xl text-gray-400">❝</span>
+          <p class="text-gray-400 leading-7">
+            adds are quite annoying, but legal, so use them from https://ohhseven.com/ and get your product rich!!! 
+          </p>
+          <span class="absolute -left-4 -top-1 text-2xl text-gray-400">❝</span>
+          <p class="text-gray-400 leading-7"></p>
+            also, give this man money, he had a stroke making this site, pay for his health !!! :UltraMad: 
+          </p>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-5xl font-bold text-center">Not convinced yet?</h3>
+    <p class="text-center text-gray-600 dark:text-gray-400 mb-6">Hear what our founder has to say about us!</p>
+    <div class="max-w-6xl mx-auto rounded-[22px] bg-gray-100 dark:bg-[#111418] border border-gray-200 dark:border-gray-800 shadow p-6 md:p-10">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="flex justify-center md:justify-start">
+
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAMAAzAMBIgACEQEDEQH/xAAcAAEBAAMAAwEAAAAAAAAAAAAAAQUGBwIDCAT/xAAwEAEAAgEDAwMCAwgDAAAAAAAAAQIDBAUREiExBlFhByIyQXETI4GRocHR4RQVQv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A4cAAAABAKACSACoqAAAAAAAAAAAAAAAqCgCKAEpAKAAigCKgKCACoAAAAAAAAAACoKAioCiKAAAAAAAAAigICggAAAAAAAKIoIoAigAAAAABxIAAAACKAgAAAAAAACgAAAAAAAD3aSOdRTnxyDZNi9F6rcaUzanPTS4rd45jm0x+jbNF9M9jyV6M266q2WfHTSsRD0bFqsdq0pa1uePPLZq6vFgrSOfumOeYgGuaz6R/u5/6/d4vf8q5sXET8cw0b1B6X3f09k6dy0s1xzPFc1Pupb+Lueza+mbNNLZeLcdXTPZk9fbBn0WSmo01dRprR03peOYtAPmHiUbj689KRsuTHr9ti99q1VpinV3nDf8AOkz7e3+mnAAAIoCAAAAAAoAAAAAAAD2aeeM1Zet5Y+14kG6bLm6ZrM2isNntFrRi6Zr1W8x8NP2mOMdbzMd/HLZdr6NXEftM0xbnivHbhRk65b6e+K1ZjqtHNfhldo3TUY8s0tMTivPeto5iXnXbceoxYscX4tEcRMx4fr0Oiror5cebiaduLzUR56imh3vQajacuHpxZqWravmPi0fMTETD593HRZdu12o0eojjLgyTjt8zH5vovSaWNNrIy1mL0t+GOPdyH6u6amD1hkyUr0/8jT48tv17x/aEVpIAAAEoqAAAAAoAAAAAAAAAMztOo6umlpn4jnw3bZMuDpivT+8r56nNtLk/Z5q+3La9r1c1zY+PumJjt7g6hoM8zFJtFeI95Zmlq6rTTivHeO7XtrrNsdMmSOJn7oifDN6e09M+OfdUZLbtLT7Im0zNI5rMz4cU+suamb1jNMcxNcWmpWY9p5mf8OzZdVj0OivqM+SMeKlJve0zxxWHzfv+5W3feNZuF+058k2iJ8xXxH9IhFY4AAAAAEFQAAFAAAAAAAAAAZ30/r6YclaZeJnntMsEsTMTExPePAO27RuNMuKn3RMezPaS3Xbms/zlw/afUmp0FYi1YyVrzxz58P17t603TXaWdNhtGmwT+KuP8Vv1kGxfU/1jj1lLbHtWXqwRbnVZq+Mkx/4j4iY5n3mIc25AAAAAAAAAEFAAAAQFAAAAAAAA5AAAAAAAAAAAARQAAAAAAAAAAAAAAAAAAAAAAAAARQAAAAAAAAAAAAAAAABFAAACUgFEAURQEUAAAEUAgASVgAEUBFAAAEBQAAJRZQAAAAH/2Q==" alt="Owner"
+               class="w-44 h-44 md:w-56 md:h-56 rounded-full object-cover ring-2 ring-gray-300/30">
+        </div>
+        <div class="text-center md:text-left">
+          <div class="text-3xl text-gray-400 mb-2">❝</div>
+          <p class="text-gray-400 leading-8 max-w-prose mx-auto md:mx-0">
+            I created this platform because advertising should be under your control — fast, fair, and transparent.
+            Really, i just want your money. 
+            If you’ve got something great, I want it to shine here.
+            S:IDUfh;sadifuhjsgdalfihdsglfijahsdglfjshdgfs
+          </p>
+          <div class="mt-6">
+            <p class="font-semibold text-black dark:text-white">OhhSeven</p>
+            <p class="text-xs text-gray-500">Founder &amp; CEO</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section id="rules" class="px-6 py-12">
+  <h2 class="text-5xl font-bold mb-4 text-center">Rules</h2>
+  <p class="text-gray-700 dark:text-gray-400 text-center">
+    Im too lazy to write bs rules so js ask me on dc if something is allowed or not.
+  </p>
+</section>
+
+<section id="contact" class="px-6 py-12">
+  <h2 class="text-5xl font-bold mb-4 text-center">Contact - How to purchase</h2>
+<p class="text-gray-700 dark:text-gray-400 text-center">
+  Please make sure you have read and understood the Rules before buying.
+</p>
+<p class="text-gray-700 dark:text-gray-400 text-center">
+  A standard ad will cost you the low price of $10 for 2 weeks.
+</p>
+<p class="text-gray-700 dark:text-gray-400 text-center">
+  If you're interested in buying an advertisement, please contact me on Discord - 'ohhsevenlol'.
+</p>
+
+  <script>
+
+    const root = document.documentElement;
+    const btn  = document.getElementById('modeToggle');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') { root.classList.remove('dark'); btn.textContent = '🌙'; }
+    else { root.classList.add('dark'); btn.textContent = 'Flashbang'; localStorage.setItem('theme','dark'); }
+    btn.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark');
+      btn.textContent = isDark ? 'Flashbang' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+
+    document.querySelectorAll('button[data-copy]').forEach(b => {
+      b.addEventListener('click', async () => {
+        const text = b.getAttribute('data-copy') || '';
+        try { await navigator.clipboard.writeText(text); }
+        catch {
+          const ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta);
+          ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+        }
+        const old = b.textContent; b.textContent = 'Copied!'; setTimeout(()=> b.textContent = old, 1200);
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
