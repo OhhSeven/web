@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bouncing Image</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden; /* Prevent scrollbars */
+      background-color: black;
+    }
+
+    img {
+      position: absolute;
+      width: 200px; /* Image size */
+      height: auto;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <img id="dvd" src="https://cdn.discordapp.com/attachments/1092809134891597908/1415076944378204321/mnelp.png?ex=68ff325a&is=68fde0da&hm=2a7ba95161b2e19c82802b6eea9a09e01394e9d725319ac450b584070719499b&" alt="Bouncing image">
+
+  <script>
+    const img = document.getElementById('dvd');
+    let x = 100;
+    let y = 100;
+    let dx = 2;
+    let dy = 2;
+
+    function move() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const iw = img.offsetWidth;
+      const ih = img.offsetHeight;
+
+      x += dx;
+      y += dy;
+
+      if (x + iw >= w || x <= 0) {
+        dx = -dx;
+      }
+      if (y + ih >= h || y <= 0) {
+        dy = -dy;
+      }
+
+      img.style.left = x + 'px';
+      img.style.top = y + 'px';
+      requestAnimationFrame(move);
+    }
+
+    move();
+  </script>
+</body>
+</html>
