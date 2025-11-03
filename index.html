@@ -38,27 +38,24 @@
   * { box-sizing: border-box; }
 
   html, body {
-    height: 100%;
     margin: 0;
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     color: #e6eef8;
     background: var(--bg);
-    position: relative;
-    overflow: hidden;
-    padding-top: 100px; /* space for the top banner */
+    padding-top: 100px; /* space for banner */
+    height: auto;        /* allow body to grow */
+    overflow: auto;      /* allow scrolling */
   }
-
+  
   .app {
     width: 100%;
     max-width: 1300px;
-    height: calc(100vh - 100px); /* full height minus banner */
     margin: 0 auto;
     display: grid;
     grid-template-columns: 320px 1fr;
     gap: 18px;
-    position: relative;
-    z-index: 2;
   }
+
 
   /* SIDEBAR */
   .sidebar {
@@ -120,8 +117,14 @@
 </head>
 <body>
 
-  <!-- TOP BANNER -->
+<body>
   <div id="topBanner">I made an AI chatbot because I was bored...</div>
+
+  <div class="app" role="application" aria-label="Ollama Chat">
+    <!-- sidebar and chat panel here -->
+  </div>
+</body>
+
 
   <!-- CHAT APP -->
   <div class="app" role="application" aria-label="Ollama Chat">
