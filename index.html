@@ -13,23 +13,21 @@
     left: 0;
     width: 100%;
     text-align: center;
-    font-size: 48px; /* huge text */
+    font-size: 48px;
     font-weight: 900;
     color: white;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
-    z-index: 4;
+    z-index: 9999;
     padding: 20px 10px;
     pointer-events: none;
-    background: rgba(0,0,0,0.3); /* optional subtle overlay behind text */
+    background: rgba(0,0,0,0.5);
   }
 
-  /* ROOT COLORS */
   :root {
     --bg: #0b0b0d;
     --panel: #0f1113;
     --muted: #98a0aa;
     --accent: #10a37f;
-    --glass: rgba(255,255,255,0.02);
     --bubble-ai: #111315;
     --bubble-user: linear-gradient(90deg,#2f80ed,#2563eb);
     --danger: #ef4444;
@@ -39,14 +37,14 @@
 
   html, body {
     margin: 0;
+    padding-top: 100px; /* space for top banner */
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     color: #e6eef8;
     background: var(--bg);
-    padding-top: 100px; /* space for banner */
-    height: auto;        /* allow body to grow */
-    overflow: auto;      /* allow scrolling */
+    height: auto;
+    overflow: auto;
   }
-  
+
   .app {
     width: 100%;
     max-width: 1300px;
@@ -54,8 +52,9 @@
     display: grid;
     grid-template-columns: 320px 1fr;
     gap: 18px;
+    position: relative;
+    z-index: 2;
   }
-
 
   /* SIDEBAR */
   .sidebar {
@@ -66,8 +65,10 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    overflow: hidden;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
   }
+
   .sb-top { display: flex; align-items: flex-start; gap: 10px; justify-content: space-between; }
   .brand { display: flex; gap: 10px; align-items: center; }
   .logo { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg,#111827,#374151); display:flex;align-items:center;justify-content:center;font-weight:700;color:#9ae6b4; box-shadow:0 6px 18px rgba(2,6,23,0.6); font-size:18px; }
@@ -84,7 +85,7 @@
   .sb-bottom { margin-top:auto; display:flex; gap:8px; align-items:center; justify-content:space-between; }
 
   /* PANEL */
-  .panel { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+  .panel { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; max-height: calc(100vh - 120px); }
   .panel-header { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid rgba(255,255,255,0.02); }
   .panel-title { font-weight:700; font-size:15px; }
   .panel-sub { color:var(--muted); font-size:13px; margin-top:2px; }
@@ -104,29 +105,22 @@
   .send-btn { background:linear-gradient(180deg,#10a37f,#0e8a6a); border:none; color:white; width:48px; height:48px;border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .send-btn:disabled { opacity:0.5; cursor:not-allowed; }
   .stop-btn { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); padding:8px 10px; border-radius:10px; cursor:pointer; }
-  .small { font-size:13px; color:var(--muted) }
   .help { padding:10px 18px; font-size:13px; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02); }
 
   @media (max-width:880px){ 
-    .app { grid-template-columns: 1fr; height:95vh; max-width:980px; } 
+    .app { grid-template-columns: 1fr; max-width:980px; } 
     .sidebar { order:2; display:none; } 
   }
+
   .chat-area::-webkit-scrollbar, .chat-list::-webkit-scrollbar { height:8px; width:8px; }
   .chat-area::-webkit-scrollbar-thumb, .chat-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.03); border-radius:8px; }
+
 </style>
 </head>
 <body>
 
-<body>
   <div id="topBanner">I made an AI chatbot because I was bored...</div>
 
-  <div class="app" role="application" aria-label="Ollama Chat">
-    <!-- sidebar and chat panel here -->
-  </div>
-</body>
-
-
-  <!-- CHAT APP -->
   <div class="app" role="application" aria-label="Ollama Chat">
     <aside class="sidebar" id="sidebar">
       <div class="sb-top">
@@ -166,9 +160,7 @@
           <textarea id="inputField" class="text-input" rows="1" placeholder="Send a message — Enter to send, Shift+Enter for newline"></textarea>
         </div>
         <button id="stopBtn" class="stop-btn" style="display:none">Stop</button>
-        <button id="sendBtn" class="send-btn" title="Send (Enter)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20 2-9 9-9z"></path></svg>
-        </button>
+        <button id="sendBtn" class="send-btn" title="Send (Enter)">Send</button>
       </div>
 
       <div class="help">Tip: Sidebar stores chats in your browser. Press <strong>Enter</strong> to send, <strong>Shift+Enter</strong> for newline.</div>
@@ -176,7 +168,45 @@
   </div>
 
 <script>
-  // Your existing JS stays here (chat logic)
+(() => {
+  const chatArea = document.getElementById("chatArea");
+  const inputField = document.getElementById("inputField");
+  const sendBtn = document.getElementById("sendBtn");
+
+  function nowTs(){ return new Date().toISOString(); }
+
+  function createMessageRow(role, text){
+    const wrapper = document.createElement("div");
+    wrapper.className = "msg-row " + (role==="user" ? "user" : "ai");
+    const avatar = document.createElement("div");
+    avatar.className = "avatar " + (role==="user" ? "user" : "ai");
+    avatar.textContent = (role==="user" ? "Y" : "AI");
+    const bubble = document.createElement("div");
+    bubble.className = "bubble " + (role==="user" ? "user" : "ai");
+    bubble.textContent = text;
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(bubble);
+    chatArea.appendChild(wrapper);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
+  function sendMessage(){
+    const text = inputField.value.trim();
+    if(!text) return;
+    createMessageRow("user", text);
+    inputField.value = "";
+    setTimeout(()=>{ createMessageRow("ai", "This is an AI response at "+nowTs()); }, 300);
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+
+  inputField.addEventListener("keydown", e => {
+    if(e.key === "Enter" && !e.shiftKey){
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+})();
 </script>
 
 </body>
