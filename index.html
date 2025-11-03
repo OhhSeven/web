@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ollama — AI Chat</title>
+<title>AI Chat</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -19,37 +19,6 @@
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#e6eef8;background:var(--bg);}
 
-  /* Top Banner */
-  #topBanner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    background: rgba(0,0,0,0.7);
-    padding: 10px 0;
-    z-index: 9999;
-  }
-
-  /* Push the app down so banner is not covering it */
-  .app {
-    margin-top: 50px; /* adjust to match banner height */
-  }
-
-
-  <body>
-    <!-- TOP BANNER -->
-    <div id="topBanner">I made an AI chatbot because I was bored...</div>
-
-    <div class="app" role="application" aria-label="Ollama Chat">
-      <!-- your sidebar and main panel code -->
-    </div>
-  </body>
-
-  /* layout */
   .app {
     width:100%;
     max-width:1300px;
@@ -60,7 +29,6 @@
     gap:18px;
   }
 
-  /* SIDEBAR */
   .sidebar {
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border:1px solid rgba(255,255,255,0.03);
@@ -103,7 +71,6 @@
 
   .sb-bottom { margin-top:auto; display:flex; gap:8px; align-items:center; justify-content:space-between; }
 
-  /* main panel */
   .panel {
     background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
     border:1px solid rgba(255,255,255,0.03);
@@ -155,7 +122,7 @@
 
   @media (max-width:880px){
     .app { grid-template-columns: 1fr; height:95vh; max-width:980px; }
-    .sidebar { order:2; display:none; } /* hidden by default on mobile */
+    .sidebar { order:2; display:none; } 
   }
 
   .chat-area::-webkit-scrollbar, .chat-list::-webkit-scrollbar { height:8px; width:8px; }
@@ -169,11 +136,10 @@
         <div class="brand" style="align-items:flex-start">
           <div class="logo">AI</div>
           <div>
-            <div class="sb-title">AI Chat</div>
+            <div class="sb-title">I Made an AI chat because I was bored</div>
             <div class="sb-sub" id="sidebarSummary">Your conversations (local)</div>
           </div>
         </div>
-        <!-- top right area left intentionally small -->
       </div>
 
       <div class="chat-list" id="chatList" role="list"></div>
@@ -216,16 +182,12 @@
 
 <script>
 (() => {
-  // ---------------------
-  // CONFIG
-  // ---------------------
+
   const OLLAMA_URL = "http://147.93.190.247:11434/api/generate"; // change if needed
   const MODEL = "phi3:mini";
   const SYSTEM_PROMPT = "You are a friendly, concise AI assistant. Answer helpfully and clearly. Do not include headings or developer instructions. Keep responses short and natural.";
 
-  // ---------------------
-  // STATE & DOM
-  // ---------------------
+
   const chatArea = document.getElementById("chatArea");
   const inputField = document.getElementById("inputField");
   const sendBtn = document.getElementById("sendBtn");
@@ -274,10 +236,10 @@
 
   function chatTitleFromMessages(messages){
     if (!messages || !messages.length) return "New chat";
-    // use first user message or assistant summary
+
     const firstUser = messages.find(m => m.role === "user");
     const txt = firstUser ? firstUser.content : messages[0].content;
-    // shorten
+
     return txt.length > 36 ? txt.slice(0,36) + "…" : txt;
   }
 
@@ -288,9 +250,7 @@
     return text.length > 60 ? text.slice(0,60) + "…" : text;
   }
 
-  // ---------------------
-  // UI: sidebar
-  // ---------------------
+
   function addChatToListUI(){
     chatListEl.innerHTML = "";
     for(const c of chats){
@@ -371,9 +331,7 @@
     const a = document.createElement("a"); a.href = url; a.download = "ollama_chats.json"; a.click(); URL.revokeObjectURL(url);
   }
 
-  // ---------------------
-  // RENDER active chat
-  // ---------------------
+
   function openChat(id){
     const c = chats.find(x=>x.id===id);
     if (!c) return;
@@ -416,9 +374,7 @@
     return wrapper;
   }
 
-  // ---------------------
-  // INIT: load saved chats
-  // ---------------------
+
   chats = loadChats();
   if (!chats || !chats.length){ createNewChat("New chat"); } else { activeChatId = chats[0].id; refreshUI(); }
 
@@ -434,9 +390,7 @@
     }
   }
 
-  // ---------------------
-  // STREAMING / AI CALL
-  // ---------------------
+
   function getPrompt(newUserMessage){
     const c = chats.find(x=>x.id===activeChatId);
     const maxTurns = 8;
@@ -514,9 +468,7 @@
     }
   }
 
-  // ---------------------
-  // UI EVENTS
-  // ---------------------
+
   sendBtn.addEventListener("click", ()=> {
     if (isGenerating) return;
     const text = inputField.value.trim();
@@ -562,7 +514,6 @@
 
   exportAllBtn.addEventListener("click", ()=> exportAll());
 
-  // send message flow
   function sendMessage(text){
     const c = chats.find(x=>x.id===activeChatId);
     if (!c) return;
@@ -596,7 +547,6 @@
     return wrapper;
   }
 
-  // initial render done
   refreshUI();
 })();
 </script>
