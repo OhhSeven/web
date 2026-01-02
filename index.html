@@ -5,382 +5,308 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #05070a;
-            --accent-glow: rgba(28, 45, 92, 0.6);
-            --grid-color: rgba(255, 255, 255, 0.03);
-            --glass-bg: rgba(255, 255, 255, 0.02);
+            --bg-dark: #030712;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a7bd5;
+            --glass-card: rgba(13, 17, 23, 0.7);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --live-green: #22c55e;
-            --discord-blue: #5865F2;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --live-green: #10b981;
             --beta-orange: #f59e0b;
-            --founder-gold: #ffcf4d;
         }
 
         body {
             margin: 0; padding: 0;
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 70%),
-                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 20px 20px, 20px 20px;
+                radial-gradient(circle at 80% 20%, rgba(0, 210, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(58, 123, 213, 0.08) 0%, transparent 40%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
             background-attachment: fixed;
-            font-family: 'Inter', -apple-system, sans-serif;
-            color: white;
+        }
+
+        nav {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            padding: 30px 10%;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Resolution_Noise.jpg');
-            opacity: 0.02; pointer-events: none; z-index: 10;
-        }
+        .nav-logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
 
-        header { text-align: center; padding: 70px 20px 60px; }
-
-        .live-indicator {
+        .saas-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            padding: 6px 14px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 6px 16px;
             border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--live-green);
-            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
             margin-bottom: 20px;
         }
 
-        .pulse-dot {
-            width: 8px; height: 8px;
-            background-color: var(--live-green);
-            border-radius: 50%;
-            position: relative;
-        }
+        .saas-dot { width: 6px; height: 6px; background-color: var(--accent-cyan); border-radius: 50%; }
 
-        .pulse-dot::after {
-            content: ""; position: absolute;
-            width: 100%; height: 100%;
-            background-color: var(--live-green);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(3); opacity: 0; }
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 40px auto 80px;
+            padding: 0 40px;
         }
 
         h1 {
             font-size: 4rem;
-            margin: 0;
             font-weight: 800;
             letter-spacing: -3px;
-            background: linear-gradient(to bottom, #ffffff 40%, #777777 100%);
+            margin: 0;
+            background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.1;
         }
 
-        .portfolio-label {
-            font-size: 0.9rem;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            font-weight: 600;
-            margin-top: 5px;
-            display: block;
+        .hero-p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin: 25px 0 30px;
+            max-width: 600px;
         }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            max-width: 950px;
-            width: 90%;
-            z-index: 20;
-        }
-
-        .project-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 22px;
-            padding: 30px 40px;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.04);
-            transform: translateX(10px);
-        }
-
-        .project-logo {
-            width: 85px; height: 85px;
-            border-radius: 18px;
-            background: #111;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--glass-border);
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .project-info { flex-grow: 1; }
-
-        .project-link {
-            text-decoration: none;
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
+        .availability-banner {
             display: inline-block;
-            margin-bottom: 5px;
+            background: rgba(245, 158, 11, 0.05);
+            border-left: 3px solid var(--beta-orange);
+            padding: 12px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+            color: #fbd38d;
         }
 
-        .project-info p { margin: 4px 0; color: #888; font-size: 0.95rem; max-width: 550px; line-height: 1.4; }
+        .quick-stats { display: flex; gap: 50px; margin-bottom: 60px; }
+        .stat-item h3 { font-size: 2.2rem; margin: 0; color: #fff; }
+        .stat-item p { font-size: 0.75rem; color: var(--text-muted); margin: 2px 0 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        .ip-text { color: var(--live-green) !important; font-family: monospace; font-weight: 600; }
-
-        .badge-container { 
-            text-align: right; 
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .status-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-            white-space: nowrap;
-        }
-
-        .founder-badge {
-            color: var(--founder-gold);
-            border-color: rgba(255, 207, 77, 0.3);
-            margin-left: 10px;
-            vertical-align: middle;
-            padding: 4px 10px;
-        }
-
-        .badge-beta { color: var(--beta-orange); border-color: rgba(245, 158, 11, 0.3); }
-        .badge-stable { color: var(--live-green); border-color: rgba(34, 197, 94, 0.3); }
-
-        .discord-stat {
-            color: var(--discord-blue);
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .discord-icon {
-            width: 16px; height: 16px;
-            fill: var(--discord-blue);
-        }
-
-        /* EXPERTISE SECTION STYLES */
-        .expertise-section {
+        .expertise-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            max-width: 950px;
-            width: 90%;
-            margin-top: 60px;
-            margin-bottom: 40px;
+            gap: 24px;
+            width: 100%;
         }
 
         .expertise-card {
-            background: rgba(255, 255, 255, 0.01);
+            background: var(--glass-card);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 40px;
-            transition: 0.3s;
+            backdrop-filter: blur(10px);
         }
 
-        .expertise-card h2 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #fff;
-        }
-
-        .expertise-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+        .expertise-card h2 { color: #fff; font-size: 1.5rem; margin: 0 0 25px 0; }
+        .expertise-card ul { list-style: none; padding: 0; margin: 0; }
 
         .expertise-card li {
-            color: #888;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-            padding-left: 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            padding-left: 25px;
             position: relative;
+            margin-bottom: 12px;
+        }
+        .expertise-card li::before { content: "•"; position: absolute; left: 0; color: var(--accent-cyan); font-weight: bold; }
+
+        .section-divider {
+            max-width: 1200px;
+            margin: 80px auto 30px;
+            padding: 0 40px;
         }
 
-        .expertise-card li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--live-green);
-            font-weight: bold;
+        .section-divider h2 { font-size: 1.8rem; letter-spacing: -1px; color: #fff; }
+
+        .project-grid {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
-        footer { padding: 80px 20px; text-align: center; }
-        .disclaimer { color: #444; font-size: 0.9rem; line-height: 1.6; }
+        .project-card {
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            transition: 0.3s ease;
+        }
 
-        @media (max-width: 850px) {
+        .project-card:hover { border-color: rgba(0, 210, 255, 0.3); transform: translateX(10px); }
+        .project-logo { width: 85px; height: 85px; border-radius: 18px; object-fit: cover; }
+        .project-info { flex: 1; }
+        .project-info h2 { font-size: 1.8rem; margin: 0; color: #fff; }
+        .project-info a { text-decoration: none; }
+        .project-info a:hover h2 { color: var(--accent-cyan); }
+        .project-info p { color: var(--text-muted); font-size: 0.95rem; margin: 8px 0; }
+        .live-tag { color: var(--live-green); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border: 1px solid var(--glass-border);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 900px) {
+            h1 { font-size: 3rem; }
+            .expertise-container { grid-template-columns: 1fr; }
             .project-card { flex-direction: column; text-align: center; }
-            .badge-container { align-items: center; margin-top: 15px; width: 100%; }
-            .expertise-section { grid-template-columns: 1fr; }
-            .founder-badge { margin: 10px auto; display: block; width: fit-content; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="live-indicator">
-            <span class="pulse-dot"></span>
-            Current Projects
+    <nav>
+        <div class="nav-logo">o7</div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="hero-left reveal">
+            <div class="saas-badge">
+                <span class="saas-dot"></span>
+                MY PORTFOLIO
+            </div>
+            <h1>Management & Development <br><span style="background: linear-gradient(to right, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Solutions</span></h1>
+            <p class="hero-p">Expert server administration and network scaling for Minecraft game servers. Delivering technical excellence and management that drives player retention. Specifically knowledgable in the Minehut community</p>
+            
+            <div class="availability-banner">
+                <strong>Current Focus:</strong> I am not looking for development opportunities right now. Accepting <strong>Management</strong> roles only.
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <h3>26+</h3>
+                    <p>Servers Managed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>22+</h3>
+                    <p>Developed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Work</h3>
+                    <p>Free & Paid</p>
+                </div>
+            </div>
         </div>
-        <h1>OhhSeven</h1>
-        <span class="portfolio-label">My Portfolio</span>
-    </header>
+
+        <div class="expertise-container reveal">
+            <div class="expertise-card">
+                <h2>Management Expertise</h2>
+                <ul>
+                    <li>Leading and organizing development or staff teams</li>
+                    <li>Planning updates, releases, and scheduled tasks</li>
+                    <li>Coordinating with builders, developers, and owners</li>
+                    <li>Handling player feedback and ticket systems</li>
+                    <li>Maintaining documentation and network consistency</li>
+                    <li>Focused on long term quality and sustainable growth</li>
+                </ul>
+            </div>
+
+            <div class="expertise-card">
+                <h2>Development Expertise</h2>
+                <ul>
+                    <li>Full Paper, Purpur, and Spigot server setup and optimization</li>
+                    <li>Spark profiling and detailed performance analysis</li>
+                    <li>Velocity/BungeeCord proxy setup and network management</li>
+                    <li>Plugin configuration and fine-tuning (LuckPerms, Essentials, etc.)</li>
+                    <li>Performance optimization through Paper configs</li>
+                    <li>Familiar with Java and Skript for customization</li>
+                    <li>Lag and error diagnostics and dependency management</li>
+                    <li>Hosting experience using Pterodactyl Panel</li>
+                    <li>Backup scheduling and server maintenance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider reveal">
+        <h2>My current projects</h2>
+    </div>
 
     <main class="project-grid">
         <div class="project-card reveal">
-            <img src="portfoliosolaritymc.png" alt="SolarityMC Logo" class="project-logo">
+            <img src="portfoliosolaritymc.png" alt="SolarityMC" class="project-logo">
             <div class="project-info">
-                <a href="https://discord.gg/yuBKSq8wwQ" class="project-link" target="_blank">Manager @ SolarityMC</a>
-                <span class="status-badge founder-badge">Founder</span>
-                <p>A GensSMP server with customized features based in Minehut.</p>
-                <p class="ip-text">IP: play.solaritymc.fun</p>
+                <a href="https://discord.gg/yuBKSq8wwQ" target="_blank"><h2>Manager @ SolarityMC</h2></a>
+                <p>A GensSMP server with customized features based in Minehut. Focused on high-tier optimization.</p>
+                <div class="live-tag">IP: play.solaritymc.fun • <span id="solarity-combined-count">...</span> Online</div>
             </div>
-            <div class="badge-container">
-                <span class="status-badge badge-stable">Season 7 • Live</span>
-                <div class="discord-stat">
-                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,0-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,0-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.24-16.14h0C130.41,50.8,121.78,27.05,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5.07-12.73,11.41-12.73S54.08,46,53.86,53,48.74,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.07-12.73,11.44-12.73S96.28,46,96.05,53,90.93,65.69,84.69,65.69Z"/></svg>
-                    750+ Members
-                </div>
-            </div>
+            <span class="status-badge" style="color: var(--live-green); border-color: rgba(16, 185, 129, 0.3);">Online</span>
         </div>
 
         <div class="project-card reveal">
-            <img src="portfoliostashsmp.png" alt="StashSMP Logo" class="project-logo">
+            <img src="questionmark.png" alt="StashSMP" class="project-logo">
             <div class="project-info">
-                <a href="https://discord.gg/mhr5cxzeEA" class="project-link" target="_blank">Owner @ StashSMP</a>
-                <span class="status-badge founder-badge">Founder</span>
-                <p>The ultimate SMP. Features a custom combat system with Crystal PvP disabled and a player driven economy. Logo is incomplete.</p>
+                <a href="https://discord.gg/mhr5cxzeEA" target="_blank"><h2>Owner @ StashSMP</h2></a>
+                <p>The ultimate SMP featuring custom combat systems and a player driven economy.</p>
             </div>
-            <div class="badge-container">
-                <span class="status-badge badge-beta">Season 1 • Unreleased</span>
-                <div class="discord-stat">
-                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,0-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,0-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.24-16.14h0C130.41,50.8,121.78,27.05,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5.07-12.73,11.41-12.73S54.08,46,53.86,53,48.74,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.07-12.73,11.44-12.73S96.28,46,96.05,53,90.93,65.69,84.69,65.69Z"/></svg>
-                    Loads, trust
-                </div>
-            </div>
+            <span class="status-badge" style="color: var(--beta-orange); border-color: rgba(245, 158, 11, 0.3);">Unreleased</span>
         </div>
 
         <div class="project-card reveal">
-            <img src="portfoliolab.png" alt="Lab Logo" class="project-logo">
+            <img src="portfoliolab.png" alt="Lab" class="project-logo">
             <div class="project-info">
-                <a href="https://discord.gg/H56hEvu7HJ" class="project-link" target="_blank">Owner @ Lab</a>
-                <span class="status-badge founder-badge">Founder</span>
-                <p>A centralized hub for the Minehut community. Connecting server owners and staff with tools, resources, and expert support.</p>
-                <p class="ip-text">Join Now!</p>
+                <a href="https://discord.gg/H56hEvu7HJ" target="_blank"><h2>Owner @ Lab</h2></a>
+                <p>A centralized hub for the Minehut community. Connecting owners with tools and, resources, and support.</p>
             </div>
-            <div class="badge-container">
-                <span class="status-badge badge-stable">v1.2.0 • Public</span>
-                <div class="discord-stat">
-                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,0-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,0-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.24-16.14h0C130.41,50.8,121.78,27.05,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5.07-12.73,11.41-12.73S54.08,46,53.86,53,48.74,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.07-12.73,11.44-12.73S96.28,46,96.05,53,90.93,65.69,84.69,65.69Z"/></svg>
-                    35+ Members
-                </div>
-            </div>
+            <span class="status-badge" style="color: var(--live-green); border-color: rgba(16, 185, 129, 0.3);">Active</span>
         </div>
 
         <div class="project-card reveal">
-            <img src="portfolioexpeditionSMP.png" alt="ExpeditionsSMP Logo" class="project-logo">
+            <img src="portfolioexpeditionSMP.png" alt="ExpeditionsSMP" class="project-logo">
             <div class="project-info">
-                <a href="https://discord.gg/CFsdm4Z8ax" class="project-link" target="_blank">Director @ ExpeditionsSMP</a>
-                <p>An upcoming network. Private development is underway, launching soon to the public.</p>
+                <a href="https://discord.gg/CFsdm4Z8ax" target="_blank"><h2>Director @ ConquestSMP</h2></a>
+                <p>An upcoming network focusing on immersive exploration. Private development is currently underway.</p>
             </div>
-            <div class="badge-container">
-                <span class="status-badge badge-beta">Season 1 • Unreleased</span>
-                <div class="discord-stat">
-                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,0-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,0-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.24-16.14h0C130.41,50.8,121.78,27.05,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5.07-12.73,11.41-12.73S54.08,46,53.86,53,48.74,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.07-12.73,11.44-12.73S96.28,46,96.05,53,90.93,65.69,84.69,65.69Z"/></svg>
-                    110+ Members
-                </div>
-            </div>
+            <span class="status-badge" style="color: var(--beta-orange); border-color: rgba(245, 158, 11, 0.3);">Unreleased</span>
         </div>
     </main>
 
-    <section class="expertise-section">
-        <div class="expertise-card reveal">
-            <h2>Development Expertise</h2>
-            <ul>
-                <li>Full Paper, Purpur, and Spigot server setup and optimization</li>
-                <li>Spark profiling and detailed performance analysis</li>
-                <li>Velocity/BungeeCord proxy setup and network management</li>
-                <li>Plugin configuration and fine-tuning (LuckPerms, Essentials, etc.)</li>
-                <li>Performance optimization through Paper configs</li>
-                <li>Familiar with Java and Skript for customization</li>
-                <li>Lag and error diagnostics and dependency management</li>
-                <li>Hosting experience using Pterodactyl Panel</li>
-                <li>Backup scheduling and server maintenance</li>
-            </ul>
-        </div>
-        <div class="expertise-card reveal">
-            <h2>Management Expertise</h2>
-            <ul>
-                <li>Leading and organizing development or staff teams</li>
-                <li>Planning updates, releases, and scheduled tasks</li>
-                <li>Coordinating with builders, developers, and owners</li>
-                <li>Handling player feedback and ticket systems</li>
-                <li>Maintaining documentation and network consistency</li>
-                <li>Focused on long term quality and sustainable growth</li>
-            </ul>
-        </div>
-    </section>
-
-    <footer>
-        <p class="disclaimer">
-            <strong>Note:</strong> This portfolio exclusively showcases my <strong>live projects</strong>.<br>
-            It does not include past projects or archived work.
-        </p>
+    <footer style="padding: 60px 20px; text-align: center; border-top: 1px solid var(--glass-border);">
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Contact me on <strong>Discord</strong> | Username: <strong>ohhsevenlol</strong></p>
     </footer>
 
     <script>
-        ScrollReveal().reveal('.reveal', { 
-            distance: '40px', 
-            origin: 'bottom', 
-            duration: 1000,
-            interval: 100 
-        });
+        ScrollReveal().reveal('.reveal', { distance: '30px', origin: 'bottom', duration: 1000, interval: 100 });
+
+        async function updateStats() {
+            try {
+                const [mainRes, backupRes] = await Promise.all([
+                    fetch(`https://api.mcsrvstat.us/2/play.solaritymc.fun`).then(res => res.json()),
+                    fetch(`https://api.mcsrvstat.us/2/backup.solaritymc.fun`).then(res => res.json())
+                ]);
+                let total = (mainRes.players?.online || 0) + (backupRes.players?.online || 0);
+                document.getElementById('solarity-combined-count').innerText = total;
+            } catch (e) { console.error(e); }
+        }
+        updateStats();
+        setInterval(updateStats, 60000);
     </script>
 </body>
 </html>
