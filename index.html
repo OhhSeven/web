@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>About Me</title>
     <script src="https://unpkg.com/scrollreveal"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -32,6 +32,16 @@
             color: var(--text-main);
             line-height: 1.6;
             background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
         }
 
         nav {
@@ -39,7 +49,7 @@
             padding: 30px 10%;
         }
 
-        .nav-logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
+        .nav-logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; color: #fff; }
 
         .saas-badge {
             display: inline-flex;
@@ -66,7 +76,7 @@
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 800;
             letter-spacing: -3px;
             margin: 0;
@@ -80,18 +90,23 @@
             font-size: 1.2rem;
             color: var(--text-muted);
             margin: 25px 0 30px;
-            max-width: 600px;
+            max-width: 700px;
         }
 
         .availability-banner {
-            display: inline-block;
-            background: rgba(245, 158, 11, 0.05);
-            border-left: 3px solid var(--beta-orange);
-            padding: 12px 20px;
-            border-radius: 0 12px 12px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 210, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 16px 24px;
+            border-radius: 12px;
             margin-bottom: 40px;
             font-size: 0.95rem;
-            color: #fbd38d;
+            color: #d1d5db;
+            backdrop-filter: blur(5px);
+            max-width: fit-content;
         }
 
         .quick-stats { display: flex; gap: 50px; margin-bottom: 60px; }
@@ -111,11 +126,19 @@
             border-radius: 24px;
             padding: 40px;
             backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 210, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 210, 255, 0.1);
         }
 
         .expertise-card h2 { color: #fff; font-size: 1.5rem; margin: 0 0 25px 0; }
-        .expertise-card ul { list-style: none; padding: 0; margin: 0; }
+        .expertise-card:hover h2 { color: var(--accent-cyan); }
 
+        .expertise-card ul { list-style: none; padding: 0; margin: 0; }
         .expertise-card li {
             color: var(--text-muted);
             font-size: 0.95rem;
@@ -151,13 +174,18 @@
             display: flex;
             align-items: center;
             gap: 35px;
-            transition: 0.3s ease;
+            transition: 0.4s ease;
         }
 
-        .project-card:hover { border-color: rgba(0, 210, 255, 0.3); transform: translateX(10px); }
+        .project-card:hover { 
+            border-color: rgba(0, 210, 255, 0.3); 
+            transform: translateX(15px);
+            background: rgba(13, 17, 23, 0.9);
+        }
+
         .project-logo { width: 85px; height: 85px; border-radius: 18px; object-fit: cover; }
         .project-info { flex: 1; }
-        .project-info h2 { font-size: 1.8rem; margin: 0; color: #fff; }
+        .project-info h2 { font-size: 1.8rem; margin: 0; color: #fff; transition: 0.3s; }
         .project-info a { text-decoration: none; }
         .project-info a:hover h2 { color: var(--accent-cyan); }
         .project-info p { color: var(--text-muted); font-size: 0.95rem; margin: 8px 0; }
@@ -182,6 +210,8 @@
 </head>
 <body>
 
+    <canvas id="bg-canvas"></canvas>
+
     <nav>
         <div class="nav-logo">o7</div>
     </nav>
@@ -193,31 +223,32 @@
                 MY PORTFOLIO
             </div>
             <h1>Management & Development <br><span style="background: linear-gradient(to right, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Solutions</span></h1>
-            <p class="hero-p">Expert server administration and network scaling for Minecraft game servers. Delivering technical excellence and management that drives player retention. Specifically knowledgable in the Minehut community</p>
+            <p class="hero-p">Expert server administration and network scaling for professional Minecraft environments. Specialized in driving player retention through technical excellence, providing solutions for both independent networks and community-driven platforms like Minehut.</p>
             
             <div class="availability-banner">
-                <strong>Current Focus:</strong> I am not looking for any <strong>Management</strong> or <strong>Development</strong> positions right now, sorry.
+                <div class="saas-dot" style="background-color: #64748b;"></div>
+                <span><strong>Current Status:</strong> At full capacity. Currently focusing on active private projects and internal network development. Although Inquiries are welcome via Discord.</span>
             </div>
 
             <div class="quick-stats">
                 <div class="stat-item">
                     <h3>24+</h3>
-                    <p>Servers Managed</p>
+                    <p>Networks Managed</p>
                 </div>
                 <div class="stat-item">
                     <h3>28+</h3>
                     <p>Servers Developed</p>
                 </div>
                 <div class="stat-item">
-                    <h3>Work</h3>
-                    <p>Free & Paid</p>
+                    <h3>High-Quality</h3>
+                    <p>Services</p>
                 </div>
             </div>
         </div>
 
         <div class="expertise-container reveal">
             <div class="expertise-card">
-                <h2>Management Expertise</h2>
+                <h2>Management</h2>
                 <ul>
                     <li>Leading and organizing development or staff teams</li>
                     <li>Planning updates, releases, and scheduled tasks</li>
@@ -229,51 +260,40 @@
             </div>
 
             <div class="expertise-card">
-                <h2>Development Expertise</h2>
+                <h2>Development</h2>
                 <ul>
-                    <li>Full Paper, Purpur, and Spigot server setup and optimization</li>
-                    <li>Spark profiling and detailed performance analysis</li>
-                    <li>Velocity/BungeeCord proxy setup and network management</li>
-                    <li>Plugin configuration and fine-tuning (LuckPerms, Essentials, etc.)</li>
-                    <li>Performance optimization through Paper configs</li>
-                    <li>Familiar with Java and Skript for customization</li>
-                    <li>Lag and error diagnostics and dependency management</li>
-                    <li>Hosting experience using Pterodactyl Panel</li>
-                    <li>Backup scheduling and server maintenance</li>
+                    <li>Velocity Proxy & BungeeCord cross-network setups</li>
+                    <li>Full network optimization (Paper, Purpur, Spigot)</li>
+                    <li>Spark profiling and performance bottleneck analysis</li>
+                    <li>Advanced plugin configuration and fine-tuning</li>
+                    <li>Familiar with Java and Skript customization</li>
+                    <li>Lag diagnostics and dependency management</li>
+                    <li>Hosting experience with Pterodactyl & Dedicated Servers</li>
+                    <li>Automated backup and maintenance systems</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="section-divider reveal">
-        <h2>My current projects</h2>
+        <h2>Active Projects (Excluding Previous Work)</h2>
     </div>
 
     <main class="project-grid">
         <div class="project-card reveal">
-            <img src="portfoliosolaritymc.png" alt="SolarityMC" class="project-logo">
-            <div class="project-info">
-                <a href="https://discord.gg/yuBKSq8wwQ" target="_blank"><h2>Manager @ SolarityMC</h2></a>
-                <p>A GensSMP server with customized features based in Minehut. Focused on high-tier gameplay.</p>
-                <div class="live-tag">IP: play.solaritymc.fun • <span id="solarity-combined-count">...</span> Online</div>
-            </div>
-            <span class="status-badge" style="color: var(--live-green); border-color: rgba(16, 185, 129, 0.3);">Online</span>
-        </div>
-
-        <div class="project-card reveal">
             <img src="StashSMPLogo.png" alt="StashSMP" class="project-logo">
             <div class="project-info">
                 <a href="https://discord.gg/mhr5cxzeEA" target="_blank"><h2>Owner @ StashSMP</h2></a>
-                <p>The ultimate SMP featuring custom systems and a player driven economy. Currently in development.</p>
+                <p>The ultimate SMP featuring custom systems and a player-driven economy. Focused on independent scalability. This is currently my biggest focus.</p>
             </div>
-            <span class="status-badge" style="color: var(--beta-orange); border-color: rgba(245, 158, 11, 0.3);">Unreleased</span>
+            <span class="status-badge" style="color: var(--beta-orange); border-color: rgba(245, 158, 11, 0.3);">In Development</span>
         </div>
 
         <div class="project-card reveal">
             <img src="portfoliolab.png" alt="Lab" class="project-logo">
             <div class="project-info">
                 <a href="https://discord.gg/H56hEvu7HJ" target="_blank"><h2>Owner @ Lab</h2></a>
-                <p>A centralized hub for the Minehut & Minekeep community. Connecting owners with tools, resources, and support.</p>
+                <p>A centralized hub providing tools, resources, and technical support for network owners targeting the Minekeep and Minehut community.</p>
             </div>
             <span class="status-badge" style="color: var(--live-green); border-color: rgba(16, 185, 129, 0.3);">Active</span>
         </div>
@@ -282,9 +302,19 @@
             <img src="inferniumlogo.png" alt="Infernium" class="project-logo">
             <div class="project-info">
                 <h2>Director @ Infernium</h2>
-                <p>An upcoming Lifesteal SMP server. Currently unreleased.</p>
+                <p>An upcoming network featuring Lifesteal, BoxPVP, and Gens Tycoon. I'm currently a Director and System Admin.</p>
             </div>
-            <span class="status-badge" style="color: var(--beta-orange); border-color: rgba(245, 158, 11, 0.3);">Unreleased</span>
+            <span class="status-badge" style="color: var(--beta-orange); border-color: rgba(245, 158, 11, 0.3);">Upcoming</span>
+        </div>
+
+        <div class="project-card reveal">
+            <img src="portfoliosolaritymc.png" alt="SolarityMC" class="project-logo">
+            <div class="project-info">
+                <a href="https://discord.gg/yuBKSq8wwQ" target="_blank"><h2>Founder @ SolarityMC</h2></a>
+                <p>A high-performance GensSMP server. Established the foundation and technical framework. I retired in March 2026.</p>
+                <div class="live-tag">IP: play.solaritymc.fun • <span id="solarity-combined-count">...</span> Online</div>
+            </div>
+            <span class="status-badge" style="color: #94a3b8; border-color: rgba(148, 163, 184, 0.3);">Established</span>
         </div>
     </main>
 
@@ -294,6 +324,52 @@
 
     <script>
         ScrollReveal().reveal('.reveal', { distance: '30px', origin: 'bottom', duration: 1000, interval: 100 });
+
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0 || this.y > canvas.height || this.y < 0) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(0, 210, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < 60; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => { initCanvas(); createParticles(); });
+        initCanvas(); createParticles(); animate();
 
         async function updateStats() {
             try {
