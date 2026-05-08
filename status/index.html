@@ -1,9 +1,616 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Availability</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Availability Status — OhhSeven</title>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #030712;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a7bd5;
+            --glass-card: rgba(13, 17, 23, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --live-green: #10b981;
+            --unavail-red: #ef4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(circle at 80% 20%, rgba(0, 210, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(58, 123, 213, 0.08) 0%, transparent 40%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            background-attachment: fixed;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+        }
+
+        .nav-logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; color: #fff; }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .back-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); color: #fff; }
+
+        .saas-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+        }
+
+        .saas-dot { width: 6px; height: 6px; background-color: var(--accent-cyan); border-radius: 50%; }
+
+        .hero-section {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin: 0 0 20px;
+            background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin-bottom: 60px;
+        }
+
+        .status-section {
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            padding: 0 40px;
+            width: 100%;
+        }
+
+        .status-card {
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 70px 60px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: border-color 1s ease, box-shadow 1s ease;
+        }
+
+        .status-card.is-available {
+            border-color: rgba(16, 185, 129, 0.35);
+            box-shadow: 0 0 100px rgba(16, 185, 129, 0.12), 0 0 40px rgba(16, 185, 129, 0.06) inset;
+        }
+
+        .status-card.is-unavailable {
+            border-color: rgba(239, 68, 68, 0.3);
+            box-shadow: 0 0 100px rgba(239, 68, 68, 0.1), 0 0 40px rgba(239, 68, 68, 0.05) inset;
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 500px; height: 250px;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: background 1s ease;
+        }
+
+        .status-card.is-available::before { background: radial-gradient(ellipse, rgba(16,185,129,0.14) 0%, transparent 70%); }
+        .status-card.is-unavailable::before { background: radial-gradient(ellipse, rgba(239,68,68,0.1) 0%, transparent 70%); }
+
+        .pulse-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+
+        .is-available .pulse-ring { border: 1px solid rgba(16, 185, 129, 0.12); animation: ring-pulse 3.5s ease-out infinite; }
+        .is-unavailable .pulse-ring { border: 1px solid rgba(239, 68, 68, 0.1); animation: ring-pulse 3.5s ease-out infinite; }
+
+        @keyframes ring-pulse {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0; }
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-dot-large {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: background 1s ease, box-shadow 1s ease;
+        }
+
+        .is-available .status-dot-large {
+            background: var(--live-green);
+            box-shadow: 0 0 14px var(--live-green), 0 0 30px rgba(16,185,129,0.5);
+            animation: dot-blink 2s ease-in-out infinite;
+        }
+
+        .is-unavailable .status-dot-large {
+            background: var(--unavail-red);
+            box-shadow: 0 0 14px var(--unavail-red), 0 0 30px rgba(239,68,68,0.5);
+        }
+
+        @keyframes dot-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        .status-word {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(3rem, 9vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            line-height: 1;
+            transition: color 1s ease;
+        }
+
+        .is-available .status-word { color: var(--live-green); }
+        .is-unavailable .status-word { color: var(--unavail-red); }
+
+        .status-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 36px;
+        }
+
+        .status-desc strong { color: #d1d5db; font-weight: 600; }
+
+        .day-dots-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .day-dot-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .day-dot-circle {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+        }
+
+        .day-dot-circle.avail { background: var(--live-green); box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+        .day-dot-circle.unavail { background: rgba(239,68,68,0.45); }
+        .day-dot-circle.today-avail { background: var(--live-green); box-shadow: 0 0 10px var(--live-green); outline: 2px solid rgba(16,185,129,0.4); outline-offset: 2px; }
+        .day-dot-circle.today-unavail { background: var(--unavail-red); box-shadow: 0 0 10px var(--unavail-red); outline: 2px solid rgba(239,68,68,0.35); outline-offset: 2px; }
+
+        .day-dot-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem;
+            color: #4b5563;
+            letter-spacing: 1px;
+        }
+
+        .day-dot-label.current { color: var(--accent-cyan); }
+
+        .lower-grid {
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .info-card {
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 210, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,210,255,0.08);
+        }
+
+        .card-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 5px 14px;
+            border-radius: 100px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 22px;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .card-sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .clock-digits {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .clock-colon { animation: colon-blink 1s step-end infinite; color: #374151; }
+
+        @keyframes colon-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .clock-date-str {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #4b5563;
+            letter-spacing: 1px;
+        }
+
+        .avail-bars { display: flex; flex-direction: column; gap: 10px; }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .bar-label { color: #4b5563; width: 88px; flex-shrink: 0; }
+
+        .bar-track {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .bar-fill { height: 100%; border-radius: 2px; }
+        .bar-fill.g { background: var(--live-green); }
+        .bar-fill.r { background: var(--unavail-red); opacity: 0.6; }
+        .bar-pct { color: #4b5563; width: 34px; text-align: right; flex-shrink: 0; }
+
+        .auto-note {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 40px;
+        }
+
+        .auto-note-inner {
+            background: rgba(0, 210, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-left: 3px solid rgba(0, 210, 255, 0.25);
+            border-radius: 0 14px 14px 0;
+            padding: 18px 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .auto-note-icon { color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px; }
+
+        .auto-note-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+        .auto-note-text strong { color: #d1d5db; font-weight: 600; }
+
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        footer p { color: #374151; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
+
+        @media (max-width: 900px) {
+            nav { padding: 30px 6%; }
+            .hero-section, .status-section, .lower-grid, .auto-note { padding: 0 24px; }
+            .lower-grid { grid-template-columns: 1fr; }
+            .status-card { padding: 50px 28px; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Currently working on this page. Coming Soon!</h1>
+
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+    <div class="nav-logo">Hi, I'm OhhSeven! o7</div>
+    <a href="https://ohhseven.com" class="back-btn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 2L4 7L9 12"/>
+        </svg>
+        Back to Portfolio
+    </a>
+</nav>
+
+<div class="hero-section reveal">
+    <div class="saas-badge">
+        <span class="saas-dot"></span>
+        AVAILABILITY STATUS
+    </div>
+    <h1>Current <span style="background: linear-gradient(to right, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Status</span></h1>
+    <p class="hero-p">This page reflects my current availability based on my general schedule. It updates automatically — I don't manually control what it shows.</p>
+</div>
+
+<section class="status-section reveal">
+    <div class="status-card" id="status-card">
+        <div class="pulse-ring"></div>
+        <div class="status-indicator">
+            <div class="status-dot-large"></div>
+            <div class="status-word" id="status-word">—</div>
+        </div>
+        <p class="status-desc" id="status-desc">Loading...</p>
+        <div class="day-dots-row" id="day-dots-row"></div>
+    </div>
+</section>
+
+<div class="auto-note reveal">
+    <div class="auto-note-inner">
+        <div class="auto-note-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+        </div>
+        <p class="auto-note-text">
+            <strong>This page is fully automatic.</strong> This status reflects my general weekly patterns only — not specific events or real time activity. It may not account for every situation and I don't manually control it. Please direct any questions to Discord @ <strong>.ohhseven</strong>
+        </p>
+    </div>
+</div>
+
+<div class="lower-grid">
+    <div class="info-card reveal">
+        <div class="card-eyebrow">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            UK LOCAL TIME
+        </div>
+        <div class="card-title">My Timezone</div>
+        <p class="card-sub">Live clock showing the current time in my timezone — Europe/London.</p>
+        <div class="clock-digits">
+            <span id="ch">--</span><span class="clock-colon">:</span><span id="cm">--</span><span class="clock-colon">:</span><span id="cs">--</span>
+        </div>
+        <div class="clock-date-str" id="clock-date">—</div>
+    </div>
+
+    <div class="info-card reveal">
+        <div class="card-eyebrow">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            WEEKLY PATTERNS
+        </div>
+        <div class="card-title">General Availability</div>
+        <p class="card-sub">A rough breakdown of my typical availability across the week based on my usual schedule.</p>
+        <div class="avail-bars">
+            <div class="bar-row">
+                <span class="bar-label">Available</span>
+                <div class="bar-track"><div class="bar-fill g" style="width:58%"></div></div>
+                <span class="bar-pct">58%</span>
+            </div>
+            <div class="bar-row">
+                <span class="bar-label">Offline</span>
+                <div class="bar-track"><div class="bar-fill r" style="width:42%"></div></div>
+                <span class="bar-pct">42%</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <p>This status page is automatically updated and does not reflect specific events. It's a rough guide.</p>
+</footer>
+
+<script>
+    ScrollReveal().reveal('.reveal', { distance: '30px', origin: 'bottom', duration: 1000, interval: 100 });
+
+    (function() {
+        const c = document.getElementById('bg-canvas');
+        const ctx = c.getContext('2d');
+        let pts = [];
+        function resize() { c.width = window.innerWidth; c.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', () => { resize(); pts = []; init(); });
+        function Pt() {
+            this.x = Math.random() * c.width;
+            this.y = Math.random() * c.height;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
+            this.r = Math.random() * 2 + 0.5;
+            this.o = Math.random() * 0.5;
+        }
+        function init() { for (let i = 0; i < 60; i++) pts.push(new Pt()); }
+        function draw() {
+            ctx.clearRect(0, 0, c.width, c.height);
+            pts.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > c.width) p.vx *= -1;
+                if (p.y < 0 || p.y > c.height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0,210,255,${p.o})`;
+                ctx.fill();
+            });
+            pts.forEach((a, i) => pts.slice(i + 1).forEach(b => {
+                const d = Math.hypot(a.x - b.x, a.y - b.y);
+                if (d < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.strokeStyle = `rgba(0,210,255,${0.07 * (1 - d / 120)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }));
+            requestAnimationFrame(draw);
+        }
+        init(); draw();
+    })();
+
+    function getUKDate() {
+        return new Date(new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }));
+    }
+
+    function isAvailable(d) {
+        const day = d.getDay();
+        const hour = d.getHours();
+        if (day === 4) return false;
+        if (hour < 10 || hour >= 22) return false;
+        return true;
+    }
+
+    const DAY_SHORT = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+    const OFFLINE_DAYS = [4];
+
+    function buildDayDots(today, nowAvail) {
+        const row = document.getElementById('day-dots-row');
+        row.innerHTML = '';
+        for (let i = 1; i <= 7; i++) {
+            const d = i % 7;
+            const isToday = d === today;
+            const dayAvail = !OFFLINE_DAYS.includes(d);
+            const wrap = document.createElement('div');
+            wrap.className = 'day-dot-item';
+            const dot = document.createElement('div');
+            dot.className = 'day-dot-circle';
+            if (isToday) {
+                dot.classList.add(nowAvail ? 'today-avail' : 'today-unavail');
+            } else {
+                dot.classList.add(dayAvail ? 'avail' : 'unavail');
+            }
+            const lbl = document.createElement('div');
+            lbl.className = 'day-dot-label' + (isToday ? ' current' : '');
+            lbl.textContent = DAY_SHORT[d];
+            wrap.appendChild(dot);
+            wrap.appendChild(lbl);
+            row.appendChild(wrap);
+        }
+    }
+
+    function updateStatus() {
+        const now = getUKDate();
+        const avail = isAvailable(now);
+        const card = document.getElementById('status-card');
+        const word = document.getElementById('status-word');
+        const desc = document.getElementById('status-desc');
+        card.className = 'status-card ' + (avail ? 'is-available' : 'is-unavailable');
+        word.textContent = avail ? 'AVAILABLE' : 'UNAVAILABLE';
+        if (avail) {
+            desc.innerHTML = `Currently <strong>open for inquiries.</strong> Feel free to reach out on Discord - I should be around. Please note the information in the box below.`;
+        } else {
+            desc.innerHTML = `Currently <strong>offline.</strong> Leave a message on Discord and I'll get back to you when I'm back. Please note the information in the box below.`;
+        }
+        buildDayDots(now.getDay(), avail);
+    }
+
+    function updateClock() {
+        const now = getUKDate();
+        const pad = n => String(n).padStart(2, '0');
+        document.getElementById('ch').textContent = pad(now.getHours());
+        document.getElementById('cm').textContent = pad(now.getMinutes());
+        document.getElementById('cs').textContent = pad(now.getSeconds());
+        const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        document.getElementById('clock-date').textContent =
+            `${DAYS[now.getDay()]}, ${now.getDate()} ${MONTHS[now.getMonth()]} ${now.getFullYear()}`;
+    }
+
+    updateStatus();
+    updateClock();
+    setInterval(updateClock, 1000);
+    setInterval(updateStatus, 30000);
+</script>
 </body>
 </html>
