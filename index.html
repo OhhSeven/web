@@ -17,6 +17,7 @@
             --text-muted: #9ca3af;
             --live-green: #10b981;
             --beta-orange: #f59e0b;
+            --current-status: #ff0000;
         }
 
         body {
@@ -99,7 +100,7 @@
             gap: 12px;
             background: rgba(0, 210, 255, 0.03);
             border: 1px solid var(--glass-border);
-            border-left: 4px solid var(--accent-cyan);
+            border-left: 4px solid var(--current-status);
             padding: 16px 24px;
             border-radius: 12px;
             margin-bottom: 40px;
@@ -118,6 +119,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 24px;
             width: 100%;
+            align-items: flex-start;
         }
 
         .expertise-card {
@@ -213,7 +215,7 @@
     <canvas id="bg-canvas"></canvas>
 
     <nav>
-        <div class="nav-logo">o7</div>
+        <div class="nav-logo">Hi, I'm OhhSeven! o7</div>
     </nav>
 
     <div class="hero-section">
@@ -223,11 +225,11 @@
                 MY PORTFOLIO
             </div>
             <h1>Management & Development <br><span style="background: linear-gradient(to right, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Solutions</span></h1>
-            <p class="hero-p">Expert server administration and network scaling for professional Minecraft environments. Specialized in driving player retention through technical excellence, providing solutions for both independent networks and community-driven platforms like Minehut.</p>
+            <p class="hero-p">Hi! I'm OhhSeven. I have several years of experience managing and developing Minecraft servers, I specialize in both the technical and organizational sides of network operations. My focus is on creating well optimized, stable servers while also coordinating teams, planning updates, and maintaining projects.</p>
             
             <div class="availability-banner">
-                <div class="saas-dot" style="background-color: #64748b;"></div>
-                <span><strong>Current Status:</strong> At full capacity. Currently focusing on active private projects and internal network development. Although Inquiries are welcome via Discord.</span>
+                <div class="saas-dot" style="background-color: #ff0000;"></div>
+                <span><strong>Current Status:</strong> At full capacity. Currently focusing on ongoing active private and public projects. Although Inquiries are welcome via Discord.</span>
             </div>
 
             <div class="quick-stats">
@@ -300,7 +302,7 @@
                 <a href="https://discord.gg/mhr5cxzeEA" target="_blank"><h2>Owner @ Infernium</h2></a>
                 <p>The ultimate Gen PVP featuring custom items and a player-driven economy. Focused on independent scalability. This is currently my biggest focus.</p>
             </div>
-            <span class="status-badge" style="color: var(--live-green); border-color: rgba(16, 185, 129, 0.3);">Online</span>
+            <span class="status-badge" style="color: rgb(217, 123, 23); border-color: rgb(237, 135, 25);">In Development</span>
         </div>
 
         <div class="project-card reveal">
@@ -319,12 +321,12 @@
                 <p>A high-performance GensSMP server. Established the foundation and technical framework. I retired in March 2026.</p>
                 <div class="live-tag">IP: play.solaritymc.fun • <span id="solarity-combined-count">...</span> Online</div>
             </div>
-            <span class="status-badge" style="color: #94a3b8; border-color: rgba(148, 163, 184, 0.3);">Established</span>
+            <span class="status-badge" style="color: #0c8cb3; border-color: #0c8cb3;">Established</span>
         </div>
     </main>
 
     <footer style="padding: 60px 20px; text-align: center; border-top: 1px solid var(--glass-border);">
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Contact me on <strong>Discord</strong> @ <strong>.ohhseven</strong></p>
+        <p style="color: var(--text-muted); font-size: 1rem;">Contact Me On Discord @ <strong>.</strong>ohhseven</p>
     </footer>
 
     <script>
